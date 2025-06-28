@@ -606,21 +606,6 @@ const App = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-yellow-400 to-yellow-500 py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">BMP Community Directory</h2>
-          <p className="text-xl text-yellow-100 mb-8">Your trusted local business directory</p>
-          <div className="max-w-4xl mx-auto">
-            <img 
-              src="https://images.pexels.com/photos/14534827/pexels-photo-14534827.jpeg" 
-              alt="Business Directory" 
-              className="w-full h-64 object-cover rounded-lg shadow-xl"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Search and Filters */}
       <section className="bg-white py-8 shadow-md">
         <div className="container mx-auto px-4">
