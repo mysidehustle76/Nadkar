@@ -1,7 +1,8 @@
 /* Custom styles for Yellow Pages App */
 
-/* Smooth transitions for all interactive elements */
+/* Apply Roboto font globally (Google Maps style) */
 * {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   transition: all 0.2s ease-in-out;
 }
 
