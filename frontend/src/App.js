@@ -599,7 +599,6 @@ const App = () => {
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-white">BMP Yellow Pages</h1>
-                <p className="text-yellow-100">www.bmpyellowpages.com</p>
               </div>
             </div>
           </div>
