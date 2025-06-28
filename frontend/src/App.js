@@ -580,7 +580,7 @@ const App = () => {
       {/* Community Banner */}
       <section className="relative">
         <img 
-          src="https://images.pexels.com/photos/32759835/pexels-photo-32759835.jpeg" 
+          src="https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg" 
           alt="Bellmoore Park Community" 
           className="w-full h-48 object-cover"
         />
