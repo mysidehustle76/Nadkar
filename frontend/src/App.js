@@ -598,8 +598,8 @@ const App = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">Yellow Pages</h1>
-                <p className="text-yellow-100">Find Local Businesses</p>
+                <h1 className="text-3xl font-bold text-white">BMP Yellow Pages</h1>
+                <p className="text-yellow-100">www.bmpyellowpages.com</p>
               </div>
             </div>
             <div className="text-right text-white">
