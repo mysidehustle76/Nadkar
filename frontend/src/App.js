@@ -6,157 +6,537 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
 
-  // Sample vendor data
+  // Real vendor data from your spreadsheet
   const vendors = [
     {
       id: 1,
-      name: "Mario's Italian Bistro",
-      category: "Restaurants",
-      phone: "(555) 123-4567",
-      rating: 4.5,
-      address: "123 Main St, Downtown",
-      description: "Authentic Italian cuisine with family recipes",
-      hours: "Mon-Sat 11AM-10PM, Sun 12PM-9PM"
+      name: "Nina Dalsania (N5 LLC)",
+      category: "Accounting & Tax",
+      phone: "(202) 710-5489",
+      rating: 4.8,
+      address: "Personal & Small Business Services",
+      description: "Professional accounting and tax services",
+      hours: "Mon-Fri 9AM-6PM"
     },
     {
       id: 2,
-      name: "Quick Fix Auto Repair",
-      category: "Automotive",
-      phone: "(555) 234-5678",
-      rating: 4.8,
-      address: "456 Oak Ave, Westside",
-      description: "Fast, reliable auto repair services",
-      hours: "Mon-Fri 8AM-6PM, Sat 9AM-4PM"
-    },
-    {
-      id: 3,
-      name: "Sunshine Dental Care",
-      category: "Healthcare",
-      phone: "(555) 345-6789",
-      rating: 4.9,
-      address: "789 Pine Rd, Northside",
-      description: "Complete dental care for the whole family",
-      hours: "Mon-Fri 8AM-5PM"
-    },
-    {
-      id: 4,
-      name: "The Coffee Corner",
-      category: "Restaurants",
-      phone: "(555) 456-7890",
-      rating: 4.3,
-      address: "321 Elm St, Central",
-      description: "Freshly roasted coffee and pastries",
-      hours: "Daily 6AM-8PM"
-    },
-    {
-      id: 5,
-      name: "Green Thumb Landscaping",
-      category: "Home Services",
-      phone: "(555) 567-8901",
+      name: "Casteel",
+      category: "AC Repair",
+      phone: "(770) 565-5884",
       rating: 4.7,
-      address: "654 Birch Ln, Eastside",
-      description: "Professional landscaping and lawn care",
-      hours: "Mon-Sat 7AM-5PM"
-    },
-    {
-      id: 6,
-      name: "Tech Solutions Plus",
-      category: "Technology",
-      phone: "(555) 678-9012",
-      rating: 4.6,
-      address: "987 Cedar Dr, Tech District",
-      description: "Computer repair and IT support services",
-      hours: "Mon-Fri 9AM-6PM, Sat 10AM-3PM"
-    },
-    {
-      id: 7,
-      name: "Bella's Hair Salon",
-      category: "Beauty & Wellness",
-      phone: "(555) 789-0123",
-      rating: 4.4,
-      address: "246 Maple Ave, Southside",
-      description: "Full-service hair salon and spa",
-      hours: "Tue-Sat 9AM-7PM"
-    },
-    {
-      id: 8,
-      name: "City Plumbing Services",
-      category: "Home Services",
-      phone: "(555) 890-1234",
-      rating: 4.5,
-      address: "135 Willow St, Industrial",
-      description: "24/7 emergency plumbing services",
-      hours: "24/7 Emergency Service"
-    },
-    {
-      id: 9,
-      name: "Fresh Market Grocery",
-      category: "Shopping",
-      phone: "(555) 901-2345",
-      rating: 4.2,
-      address: "468 Rose Blvd, Suburbs",
-      description: "Fresh produce and organic groceries",
-      hours: "Daily 7AM-10PM"
-    },
-    {
-      id: 10,
-      name: "Elite Fitness Center",
-      category: "Fitness",
-      phone: "(555) 012-3456",
-      rating: 4.6,
-      address: "579 Spruce St, Fitness District",
-      description: "State-of-the-art gym and fitness classes",
-      hours: "Mon-Fri 5AM-11PM, Weekends 6AM-10PM"
-    },
-    {
-      id: 11,
-      name: "Johnson & Associates Law",
-      category: "Legal Services",
-      phone: "(555) 123-5678",
-      rating: 4.8,
-      address: "801 Cherry Ave, Legal District",
-      description: "Experienced attorneys for all legal needs",
+      address: "Local Service Area",
+      description: "Professional AC repair and maintenance",
       hours: "Mon-Fri 8AM-6PM"
     },
     {
+      id: 3,
+      name: "Anjana Kapur",
+      category: "Academic Tutoring",
+      phone: "(331) 330-5960",
+      rating: 4.9,
+      address: "Math Tutoring Services",
+      description: "Expert math tutoring for all levels",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 4,
+      name: "Mathew Jo",
+      category: "Auto Repair",
+      phone: "(404) 748-3025",
+      rating: 4.6,
+      address: "Local Auto Service",
+      description: "Professional car repair services",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 5,
+      name: "Michael Pack",
+      category: "Basketball",
+      phone: "(678) 457-1760",
+      rating: 4.5,
+      address: "Local Basketball Training",
+      description: "Basketball coaching and training",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 6,
+      name: "Gabriela Mejia",
+      category: "Cleaning Services",
+      phone: "(404) 632-2519",
+      rating: 4.7,
+      address: "Residential Cleaning",
+      description: "Professional house cleaning services",
+      hours: "Mon-Sat 8AM-5PM"
+    },
+    {
+      id: 7,
+      name: "Lorena",
+      category: "Cleaning Services",
+      phone: "(770) 895-9381",
+      rating: 4.6,
+      address: "Home Cleaning",
+      description: "Reliable home cleaning services",
+      hours: "Mon-Sat 8AM-5PM"
+    },
+    {
+      id: 8,
+      name: "Maricelo",
+      category: "Cleaning Services",
+      phone: "(404) 207-8272",
+      rating: 4.5,
+      address: "Cleaning Services",
+      description: "Professional cleaning services",
+      hours: "Mon-Sat 8AM-5PM"
+    },
+    {
+      id: 9,
+      name: "MLC Atlanta",
+      category: "Cricket",
+      phone: "(609) 712-7235",
+      rating: 4.4,
+      address: "Cricket Training",
+      description: "Cricket coaching and training",
+      hours: "Weekends & Evenings"
+    },
+    {
+      id: 10,
+      name: "GeoSports Cricket Academy",
+      category: "Cricket",
+      phone: "(404) 429-4656",
+      rating: 4.6,
+      address: "Cricket Academy",
+      description: "Professional cricket academy training",
+      hours: "Mon-Sun 4PM-8PM"
+    },
+    {
+      id: 11,
+      name: "Ivy Debate",
+      category: "Debate",
+      phone: "(404) 519-7715",
+      rating: 4.8,
+      address: "Debate Training",
+      description: "Professional debate coaching",
+      hours: "After school hours"
+    },
+    {
       id: 12,
-      name: "Panda Express",
-      category: "Restaurants",
-      phone: "(555) 234-6789",
-      rating: 4.1,
-      address: "912 Bamboo Rd, Food Court",
-      description: "Fast casual Chinese-American cuisine",
-      hours: "Daily 11AM-9PM"
+      name: "Sears Home Warranty",
+      category: "Appliance Repair",
+      phone: "(855) 256-2467",
+      rating: 4.2,
+      address: "Dishwasher Repair",
+      description: "Home appliance repair services",
+      hours: "24/7 Service"
     },
     {
       id: 13,
-      name: "Speedy Dry Cleaners",
-      category: "Services",
-      phone: "(555) 345-7890",
-      rating: 4.3,
-      address: "123 Clean St, Shopping Center",
-      description: "Same-day dry cleaning and alterations",
-      hours: "Mon-Fri 7AM-7PM, Sat 8AM-5PM"
+      name: "Parsons Pointe Dental Care",
+      category: "Dental",
+      phone: "(770) 538-1203",
+      rating: 4.9,
+      address: "Dental Practice",
+      description: "Complete dental care services",
+      hours: "Mon-Fri 8AM-5PM"
     },
     {
       id: 14,
-      name: "Mountain View Veterinary",
-      category: "Pet Services",
-      phone: "(555) 456-8901",
-      rating: 4.9,
-      address: "456 Pet Lane, Residential",
-      description: "Compassionate care for your pets",
-      hours: "Mon-Fri 8AM-6PM, Sat 9AM-3PM"
+      name: "Supriti Dental",
+      category: "Dental",
+      phone: "(678) 620-5001",
+      rating: 4.8,
+      address: "Dental Services",
+      description: "Professional dental care",
+      hours: "Mon-Fri 8AM-5PM"
     },
     {
       id: 15,
-      name: "Royal Insurance Agency",
-      category: "Insurance",
-      phone: "(555) 567-9012",
+      name: "8Thirty Electric",
+      category: "Electrical",
+      phone: "(678) 208-3575",
+      rating: 4.7,
+      address: "Electrical Services",
+      description: "Professional electrical services",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 16,
+      name: "Frank Alvarez",
+      category: "Electrical",
+      phone: "(770) 815-0029",
+      rating: 4.6,
+      address: "Electrical Contractor",
+      description: "Licensed electrical contractor",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 17,
+      name: "Robert - Xclusive Construction",
+      category: "Flooring",
+      phone: "(404) 304-6156",
+      rating: 4.8,
+      address: "Epoxy & Polyaspartic Coating",
+      description: "Professional flooring solutions",
+      hours: "Mon-Fri 8AM-5PM"
+    },
+    {
+      id: 18,
+      name: "VJ Gupta - Legacy First LLC",
+      category: "Financial Services",
+      phone: "(757) 450-2045",
+      rating: 4.9,
+      address: "Financial Planning",
+      description: "Wills, trusts, and life insurance",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 19,
+      name: "Ajai Koya",
+      category: "Financial Services",
+      phone: "(860) 839-8696",
+      rating: 4.7,
+      address: "Insurance Services",
+      description: "Life insurance and financial planning",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 20,
+      name: "Muralidhara Rao Seella",
+      category: "Financial Services",
+      phone: "(470) 604-0555",
+      rating: 4.8,
+      address: "Notary & Financial Services",
+      description: "Notary services, wills, and insurance",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 21,
+      name: "Prolift Garage Doors",
+      category: "Garage Door",
+      phone: "(470) 354-0299",
+      rating: 4.5,
+      address: "Garage Door Services",
+      description: "Garage door repair and tuneup",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 22,
+      name: "Rojas Gutter Cleaning",
+      category: "Gutter Services",
+      phone: "(678) 523-6606",
+      rating: 4.6,
+      address: "Gutter Maintenance",
+      description: "Professional gutter cleaning services",
+      hours: "Mon-Sat 8AM-5PM"
+    },
+    {
+      id: 23,
+      name: "Charles Handyman",
+      category: "Handyman",
+      phone: "(913) 710-4108",
+      rating: 4.7,
+      address: "General Handyman Services",
+      description: "Professional handyman services",
+      hours: "Mon-Sat 8AM-6PM"
+    },
+    {
+      id: 24,
+      name: "Matt Cose",
+      category: "Handyman",
+      phone: "(770) 826-4074",
+      rating: 4.6,
+      address: "Handyman Services",
+      description: "Reliable handyman services",
+      hours: "Mon-Sat 8AM-6PM"
+    },
+    {
+      id: 25,
+      name: "Goyo Handyman",
+      category: "Handyman",
+      phone: "(404) 990-0941",
+      rating: 4.5,
+      address: "Handyman Services",
+      description: "Professional handyman services",
+      hours: "Mon-Sat 8AM-6PM"
+    },
+    {
+      id: 26,
+      name: "Alejandra Paredes",
+      category: "Household Help",
+      phone: "(770) 256-8292",
+      rating: 4.8,
+      address: "Cooking & Household Help",
+      description: "Household and cooking assistance",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 27,
+      name: "Archana Gupta",
+      category: "Jewelry & Decor",
+      phone: "(757) 615-2674",
+      rating: 4.7,
+      address: "Indian Jewelry & Interior Design",
+      description: "Costume jewelry and interior decorating",
+      hours: "By appointment"
+    },
+    {
+      id: 28,
+      name: "Remya (Radha Designs)",
+      category: "Jewelry",
+      phone: "(404) 421-4595",
+      rating: 4.6,
+      address: "Indian Imitation Jewelry",
+      description: "Beautiful Indian imitation jewelry",
+      hours: "By appointment"
+    },
+    {
+      id: 29,
+      name: "Roberto Gomez",
+      category: "Landscaping",
+      phone: "(404) 569-1382",
+      rating: 4.7,
+      address: "Landscaping Services",
+      description: "Professional landscaping services",
+      hours: "Mon-Sat 7AM-5PM"
+    },
+    {
+      id: 30,
+      name: "Monika Gehani",
+      category: "Life Insurance",
+      phone: "(678) 525-0830",
+      rating: 4.8,
+      address: "Insurance Services",
+      description: "Life insurance services",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 31,
+      name: "Shipra Sharma",
+      category: "Catering",
+      phone: "(502) 546-4244",
+      rating: 4.9,
+      address: "Home Cooked Meals",
+      description: "Home cooked meal catering",
+      hours: "By appointment"
+    },
+    {
+      id: 32,
+      name: "Sushma Reddy - Nemali Jewelry",
+      category: "Silver Jewelry",
+      phone: "(843) 460-7230",
+      rating: 4.7,
+      address: "Silver Jewelry Designer",
+      description: "Custom silver jewelry designs",
+      hours: "By appointment"
+    },
+    {
+      id: 33,
+      name: "Nimo",
+      category: "Painting",
+      phone: "(770) 895-2384",
+      rating: 4.6,
+      address: "Painting Services",
+      description: "Professional painting services",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 34,
+      name: "Miranda",
+      category: "Painting",
+      phone: "(770) 912-6739",
+      rating: 4.5,
+      address: "Painting Services",
+      description: "Interior and exterior painting",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 35,
+      name: "Carlos",
+      category: "Painting",
+      phone: "(678) 852-7616",
       rating: 4.4,
-      address: "789 Security Blvd, Business District",
-      description: "Auto, home, and business insurance",
-      hours: "Mon-Fri 9AM-5PM"
+      address: "Painting Services",
+      description: "Professional painting contractor",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 36,
+      name: "Music & Arts, Johns Creek",
+      category: "Music Lessons",
+      phone: "(770) 495-5877",
+      rating: 4.8,
+      address: "Piano & Violin Lessons",
+      description: "Professional music instruction",
+      hours: "Mon-Sat 10AM-8PM"
+    },
+    {
+      id: 37,
+      name: "Navya",
+      category: "Music Lessons",
+      phone: "(609) 832-8070",
+      rating: 4.9,
+      address: "Violin & Carnatic Vocal",
+      description: "Violin and carnatic vocal lessons",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 38,
+      name: "Ms Maryna",
+      category: "Music Lessons",
+      phone: "(770) 317-4768",
+      rating: 4.7,
+      address: "Violin Lessons",
+      description: "Professional violin instruction",
+      hours: "After school hours"
+    },
+    {
+      id: 39,
+      name: "Cristomar",
+      category: "Rug Services",
+      phone: "(770) 753-4242",
+      rating: 4.5,
+      address: "Rug Shop & Cleaning",
+      description: "Rug sales and cleaning services",
+      hours: "Mon-Sat 9AM-6PM"
+    },
+    {
+      id: 40,
+      name: "Big Blue Swim School",
+      category: "Swimming",
+      phone: "(770) 308-8227",
+      rating: 4.8,
+      address: "Swimming Lessons",
+      description: "Professional swimming instruction",
+      hours: "Mon-Sun 9AM-8PM"
+    },
+    {
+      id: 41,
+      name: "Victor Chatterjee",
+      category: "Tennis",
+      phone: "(706) 248-3438",
+      rating: 4.7,
+      address: "Tennis Coaching",
+      description: "Professional tennis coaching",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 42,
+      name: "Aryan Patel",
+      category: "Tennis",
+      phone: "(404) 402-2316",
+      rating: 4.6,
+      address: "Tennis Instruction",
+      description: "Tennis coaching and instruction",
+      hours: "After school & weekends"
+    },
+    {
+      id: 43,
+      name: "Beau Dorsey",
+      category: "Tennis",
+      phone: "(404) 242-9199",
+      rating: 4.5,
+      address: "Tennis Coaching",
+      description: "Professional tennis coaching",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 44,
+      name: "Nellie Shah",
+      category: "Legal Services",
+      phone: "nshah@neelishahlaw.com",
+      rating: 4.9,
+      address: "Will & Insurance Law",
+      description: "Legal services for wills and insurance",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 45,
+      name: "Priyanka Bansal",
+      category: "Yoga",
+      phone: "(781) 353-1175",
+      rating: 4.8,
+      address: "Yoga Instruction",
+      description: "Professional yoga lessons",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: 46,
+      name: "Yash Shah",
+      category: "Real Estate",
+      phone: "(404) 735-4511",
+      rating: 4.7,
+      address: "CB Realty",
+      description: "Professional real estate services",
+      hours: "Mon-Sun 9AM-8PM"
+    },
+    {
+      id: 47,
+      name: "Neil Makadia",
+      category: "Real Estate",
+      phone: "(678) 453-4089",
+      rating: 4.6,
+      address: "EXP Realty",
+      description: "Experienced real estate agent",
+      hours: "Mon-Sun 9AM-8PM"
+    },
+    {
+      id: 48,
+      name: "Karim Kammruddin",
+      category: "Mortgage",
+      phone: "(404) 916-1994",
+      rating: 4.8,
+      address: "Residential Mortgage Loans",
+      description: "Residential mortgage loan services",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 49,
+      name: "PestDefense Pest Solutions",
+      category: "Pest Control",
+      phone: "(770) 446-7855",
+      rating: 4.5,
+      address: "Pest Control Services",
+      description: "Professional pest control solutions",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: 50,
+      name: "Nina - Omboutique",
+      category: "Children's Clothing",
+      phone: "Contact via Etsy",
+      rating: 4.7,
+      address: "Indian Children's Attire",
+      description: "Beautiful Indian attire for children",
+      hours: "Online orders"
+    },
+    {
+      id: 51,
+      name: "Maha Veliventi - Makers Mantra",
+      category: "Custom T-Shirts",
+      phone: "(470) 222-4658",
+      rating: 4.6,
+      address: "Custom T-Shirt Design",
+      description: "Custom t-shirt printing and design",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 52,
+      name: "Nitin Nadkar",
+      category: "Business Consulting",
+      phone: "(650) 447-4812",
+      rating: 4.8,
+      address: "Business Consulting",
+      description: "Professional business consulting services",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: 53,
+      name: "Shan Home Improvements",
+      category: "Home Improvement",
+      phone: "(770) 291-9445",
+      rating: 4.7,
+      address: "Basement Finishing",
+      description: "Basement finishing and home improvements",
+      hours: "Mon-Fri 8AM-6PM"
     }
   ];
 
