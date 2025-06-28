@@ -509,7 +509,7 @@ const App = () => {
       hours: "Mon-Fri 9AM-6PM"
     },
     {
-      id: 53,
+      id: 52,
       name: "Shan Home Improvements",
       category: "Home Improvement",
       phone: "(770) 291-9445",
