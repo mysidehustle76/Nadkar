@@ -579,13 +579,6 @@ const App = () => {
                   </span>
                 </div>
                 
-                <div className="flex items-center mb-3">
-                  <div className="flex items-center">
-                    {renderStars(vendor.rating)}
-                    <span className="ml-2 text-gray-600 text-sm">({vendor.rating})</span>
-                  </div>
-                </div>
-
                 <p className="text-gray-600 mb-3">{vendor.description}</p>
                 
                 <div className="space-y-2 mb-4">
