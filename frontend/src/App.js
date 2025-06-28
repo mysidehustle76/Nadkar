@@ -619,52 +619,6 @@ const App = () => {
         </div>
       </header>
 
-      {/* Search and Filters */}
-      <section className="bg-white py-8 shadow-md">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Search Bar */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search businesses..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-              />
-              <svg className="absolute right-3 top-3 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-
-            {/* Category Filter */}
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-            >
-              <option value="">All Categories</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-
-            {/* Rating Filter */}
-            <select
-              value={selectedRating}
-              onChange={(e) => setSelectedRating(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-            >
-              <option value="">All Ratings</option>
-              <option value="4.5">4.5+ Stars</option>
-              <option value="4.0">4.0+ Stars</option>
-              <option value="3.5">3.5+ Stars</option>
-              <option value="3.0">3.0+ Stars</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
       {/* Vendors List */}
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
