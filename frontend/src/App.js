@@ -590,7 +590,7 @@ const App = () => {
       {/* Header */}
       <header className="bg-yellow-400 shadow-lg">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <div className="flex items-center space-x-4">
               <div className="bg-white p-2 rounded-lg shadow-md">
                 <svg className="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
@@ -601,10 +601,6 @@ const App = () => {
                 <h1 className="text-3xl font-bold text-white">BMP Yellow Pages</h1>
                 <p className="text-yellow-100">www.bmpyellowpages.com</p>
               </div>
-            </div>
-            <div className="text-right text-white">
-              <p className="text-sm">Connecting Communities</p>
-              <p className="text-lg font-semibold">{filteredVendors.length} Businesses Listed</p>
             </div>
           </div>
         </div>
