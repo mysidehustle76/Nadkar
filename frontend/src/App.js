@@ -542,17 +542,7 @@ const App = () => {
 
   const categories = [...new Set(vendors.map(vendor => vendor.category))].sort();
 
-  const filteredVendors = useMemo(() => {
-    return vendors.filter(vendor => {
-      const matchesSearch = vendor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           vendor.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           vendor.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === '' || vendor.category === selectedCategory;
-      const matchesRating = selectedRating === '' || vendor.rating >= parseFloat(selectedRating);
-      
-      return matchesSearch && matchesCategory && matchesRating;
-    });
-  }, [searchTerm, selectedCategory, selectedRating]);
+  const filteredVendors = vendors;
 
   const renderStars = (rating) => {
     const stars = [];
