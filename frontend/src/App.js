@@ -509,16 +509,6 @@ const App = () => {
       hours: "Mon-Fri 9AM-6PM"
     },
     {
-      id: 52,
-      name: "Nitin Nadkar",
-      category: "Business Consulting",
-      phone: "(650) 447-4812",
-      rating: 4.8,
-      address: "Business Consulting",
-      description: "Professional business consulting services",
-      hours: "Mon-Fri 9AM-6PM"
-    },
-    {
       id: 53,
       name: "Shan Home Improvements",
       category: "Home Improvement",
