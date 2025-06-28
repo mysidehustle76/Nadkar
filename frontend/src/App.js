@@ -592,23 +592,6 @@ const App = () => {
         </div>
       </section>
 
-      <header className="bg-yellow-400 shadow-lg">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-4">
-              <div className="bg-white p-2 rounded-lg shadow-md">
-                <svg className="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-white">BMP Yellow Pages</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Vendors List */}
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
