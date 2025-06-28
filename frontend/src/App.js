@@ -587,7 +587,21 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Community Banner */}
+      <section className="relative">
+        <img 
+          src="https://images.pexels.com/photos/32759835/pexels-photo-32759835.jpeg" 
+          alt="Bellmoore Park Community" 
+          className="w-full h-48 object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h2 className="text-4xl font-bold mb-2">Bellmoore Park Community</h2>
+            <p className="text-xl">Your Local Business Directory</p>
+          </div>
+        </div>
+      </section>
+
       <header className="bg-yellow-400 shadow-lg">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-center">
@@ -599,13 +613,6 @@ const App = () => {
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-white">BMP Yellow Pages</h1>
-              </div>
-              <div className="ml-6">
-                <img 
-                  src="https://images.pexels.com/photos/32759835/pexels-photo-32759835.jpeg" 
-                  alt="Bellmoore Park Community" 
-                  className="w-20 h-16 object-cover rounded-lg shadow-md border-2 border-white"
-                />
               </div>
             </div>
           </div>
