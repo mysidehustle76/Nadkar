@@ -584,12 +584,6 @@ const App = () => {
           alt="Bellmoore Park Community" 
           className="w-full h-48 object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h2 className="text-4xl font-bold mb-2">Bellmoore Park Community</h2>
-            <p className="text-xl">Your Local Business Directory</p>
-          </div>
-        </div>
       </section>
 
       {/* Vendors List */}
