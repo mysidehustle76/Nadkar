@@ -600,6 +600,13 @@ const App = () => {
               <div>
                 <h1 className="text-3xl font-bold text-white">BMP Yellow Pages</h1>
               </div>
+              <div className="ml-6">
+                <img 
+                  src="https://images.pexels.com/photos/32759835/pexels-photo-32759835.jpeg" 
+                  alt="Bellmoore Park Community" 
+                  className="w-20 h-16 object-cover rounded-lg shadow-md border-2 border-white"
+                />
+              </div>
             </div>
           </div>
         </div>
