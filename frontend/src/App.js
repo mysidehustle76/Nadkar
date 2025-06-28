@@ -20,16 +20,6 @@ const App = () => {
     },
     {
       id: 2,
-      name: "Casteel",
-      category: "AC Repair",
-      phone: "(770) 565-5884",
-      rating: 4.7,
-      address: "Local Service Area",
-      description: "Professional AC repair and maintenance",
-      hours: "Mon-Fri 8AM-6PM"
-    },
-    {
-      id: 3,
       name: "Anjana Kapur",
       category: "Academic Tutoring",
       phone: "(331) 330-5960",
