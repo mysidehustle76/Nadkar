@@ -228,9 +228,10 @@ class TestVendorAPI:
         """Test creating vendor with same name twice"""
         print("Testing duplicate vendor name validation...")
         
-        # Create first vendor
+        # Create first vendor with unique name for this test
+        vendor_name = f"Duplicate Name Company {TEST_RUN_ID}"
         vendor_data = {
-            "vendor_name": "Duplicate Name Company",
+            "vendor_name": vendor_name,
             "service_provider_name": "Duplicate Name Provider",
             "phone_number": "1112223333"
         }
@@ -243,7 +244,7 @@ class TestVendorAPI:
         
         # Try to create second vendor with same name but different phone
         vendor_data = {
-            "vendor_name": "Duplicate Name Company",
+            "vendor_name": vendor_name,
             "service_provider_name": "Different Provider",
             "phone_number": "4445556666"
         }
