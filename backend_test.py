@@ -87,9 +87,9 @@ class TestVendorAPI:
         """Test creating a vendor with valid data"""
         print("Testing valid vendor creation...")
         
-        # Test data
+        # Test data with unique name
         vendor_data = {
-            "vendor_name": "ABC Corporation",
+            "vendor_name": f"ABC Corporation {TEST_RUN_ID}",
             "service_provider_name": "John Smith",
             "phone_number": "1234567890"
         }
