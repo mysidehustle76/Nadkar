@@ -36,6 +36,84 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Vendor Models
+class Vendor(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    vendor_name: str = Field(..., min_length=1, max_length=100)
+    service_provider_name: str = Field(..., min_length=1, max_length=100)
+    phone_number: str = Field(..., min_length=10, max_length=15)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+    @validator('vendor_name')
+    def validate_vendor_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Vendor name cannot be empty')
+        return v.strip()
+
+    @validator('service_provider_name')
+    def validate_service_provider_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Service provider name cannot be empty')
+        return v.strip()
+
+    @validator('phone_number')
+    def validate_phone_number(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Phone number cannot be empty')
+        
+        # Remove any spaces, dashes, or parentheses
+        cleaned_phone = re.sub(r'[\s\-\(\)]', '', v)
+        
+        # Check if it contains only digits
+        if not cleaned_phone.isdigit():
+            raise ValueError('Phone number must contain only numeric characters')
+        
+        # Check length (10-15 digits is reasonable for international numbers)
+        if len(cleaned_phone) < 10:
+            raise ValueError('Phone number must be at least 10 digits')
+        if len(cleaned_phone) > 15:
+            raise ValueError('Phone number cannot be more than 15 digits')
+        
+        return cleaned_phone
+
+class VendorCreate(BaseModel):
+    vendor_name: str = Field(..., min_length=1, max_length=100)
+    service_provider_name: str = Field(..., min_length=1, max_length=100)
+    phone_number: str = Field(..., min_length=10, max_length=15)
+
+    @validator('vendor_name')
+    def validate_vendor_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Vendor name cannot be empty')
+        return v.strip()
+
+    @validator('service_provider_name')
+    def validate_service_provider_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Service provider name cannot be empty')
+        return v.strip()
+
+    @validator('phone_number')
+    def validate_phone_number(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Phone number cannot be empty')
+        
+        # Remove any spaces, dashes, or parentheses
+        cleaned_phone = re.sub(r'[\s\-\(\)]', '', v)
+        
+        # Check if it contains only digits
+        if not cleaned_phone.isdigit():
+            raise ValueError('Phone number must contain only numeric characters')
+        
+        # Check length (10-15 digits is reasonable for international numbers)
+        if len(cleaned_phone) < 10:
+            raise ValueError('Phone number must be at least 10 digits')
+        if len(cleaned_phone) > 15:
+            raise ValueError('Phone number cannot be more than 15 digits')
+        
+        return cleaned_phone
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
