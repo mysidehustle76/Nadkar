@@ -4,6 +4,8 @@ import time
 import os
 import sys
 from dotenv import load_dotenv
+import uuid
+from datetime import datetime
 
 # Load environment variables from frontend/.env
 load_dotenv('/app/frontend/.env')
@@ -17,6 +19,9 @@ if not BACKEND_URL:
 # Ensure the URL ends with /api
 API_URL = f"{BACKEND_URL}/api"
 print(f"Using API URL: {API_URL}")
+
+# Generate a unique test run ID to avoid duplicate vendor names
+TEST_RUN_ID = datetime.now().strftime("%Y%m%d%H%M%S")
 
 # Test class for vendor management API
 class TestVendorAPI:
