@@ -416,6 +416,146 @@ class TestVendorAPI:
         
         print("Get specific vendor test passed")
         return True
+    
+    def test_valid_vendor_deletion(self):
+        """Test deleting a vendor with valid ID"""
+        print("Testing valid vendor deletion...")
+        
+        # Create a new vendor
+        vendor_data = {
+            "vendor_name": f"Delete Test Company {TEST_RUN_ID}",
+            "service_provider_name": "Delete Test Provider",
+            "phone_number": generate_random_phone()
+        }
+        
+        create_response = self.create_vendor(vendor_data)
+        if create_response.status_code != 200:
+            print(f"Failed to create test vendor. Status code: {create_response.status_code}")
+            print(f"Response: {create_response.text}")
+            return False
+        
+        # Get the vendor ID
+        created_vendor = create_response.json()
+        vendor_id = created_vendor.get("id")
+        
+        # Delete the vendor
+        response = requests.delete(f"{self.vendors_endpoint}/{vendor_id}")
+        
+        # Verify response
+        if response.status_code != 200:
+            print(f"Failed to delete vendor. Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+        
+        # Verify response data
+        response_data = response.json()
+        if not response_data.get("message") or "success" not in response_data.get("message").lower():
+            print(f"Expected success message in response, got: {response_data}")
+            return False
+        
+        if response_data.get("deleted_vendor_id") != vendor_id:
+            print(f"Vendor ID mismatch in delete response. Expected: {vendor_id}, Got: {response_data.get('deleted_vendor_id')}")
+            return False
+        
+        print("Valid vendor deletion test passed")
+        return True
+    
+    def test_delete_nonexistent_vendor(self):
+        """Test deleting a vendor with non-existent ID"""
+        print("Testing delete non-existent vendor...")
+        
+        # Generate a random UUID that doesn't exist
+        non_existent_id = str(uuid.uuid4())
+        
+        # Try to delete non-existent vendor
+        response = requests.delete(f"{self.vendors_endpoint}/{non_existent_id}")
+        
+        # Verify response
+        if response.status_code != 404:
+            print(f"Expected status code 404 for non-existent ID, got {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+        
+        print("Delete non-existent vendor test passed")
+        return True
+    
+    def test_delete_invalid_id_format(self):
+        """Test deleting a vendor with invalid ID format"""
+        print("Testing delete with invalid ID format...")
+        
+        # Try to delete with invalid ID format
+        invalid_id = "invalid-id-format"
+        response = requests.delete(f"{self.vendors_endpoint}/{invalid_id}")
+        
+        # Verify response - should be 404 or 400
+        if response.status_code != 404 and response.status_code != 400:
+            print(f"Expected status code 404 or 400 for invalid ID format, got {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+        
+        print("Delete with invalid ID format test passed")
+        return True
+    
+    def test_verify_vendor_gone(self):
+        """Test that a deleted vendor is actually gone"""
+        print("Testing verify vendor is gone after deletion...")
+        
+        # Create a new vendor
+        vendor_data = {
+            "vendor_name": f"Verify Gone Test Company {TEST_RUN_ID}",
+            "service_provider_name": "Verify Gone Test Provider",
+            "phone_number": generate_random_phone()
+        }
+        
+        create_response = self.create_vendor(vendor_data)
+        if create_response.status_code != 200:
+            print(f"Failed to create test vendor. Status code: {create_response.status_code}")
+            print(f"Response: {create_response.text}")
+            return False
+        
+        # Get the vendor ID
+        created_vendor = create_response.json()
+        vendor_id = created_vendor.get("id")
+        
+        # Verify vendor exists before deletion
+        get_response = requests.get(f"{self.vendors_endpoint}/{vendor_id}")
+        if get_response.status_code != 200:
+            print(f"Failed to get vendor before deletion. Status code: {get_response.status_code}")
+            print(f"Response: {get_response.text}")
+            return False
+        
+        # Delete the vendor
+        delete_response = requests.delete(f"{self.vendors_endpoint}/{vendor_id}")
+        if delete_response.status_code != 200:
+            print(f"Failed to delete vendor. Status code: {delete_response.status_code}")
+            print(f"Response: {delete_response.text}")
+            return False
+        
+        # Try to get the vendor after deletion
+        get_after_delete_response = requests.get(f"{self.vendors_endpoint}/{vendor_id}")
+        
+        # Verify vendor is gone
+        if get_after_delete_response.status_code != 404:
+            print(f"Expected status code 404 after deletion, got {get_after_delete_response.status_code}")
+            print(f"Response: {get_after_delete_response.text}")
+            return False
+        
+        # Verify other vendors still exist by getting all vendors
+        all_vendors_response = requests.get(self.vendors_endpoint)
+        if all_vendors_response.status_code != 200:
+            print(f"Failed to get all vendors after deletion. Status code: {all_vendors_response.status_code}")
+            print(f"Response: {all_vendors_response.text}")
+            return False
+        
+        # Check that the deleted vendor is not in the list
+        vendors = all_vendors_response.json()
+        for vendor in vendors:
+            if vendor.get("id") == vendor_id:
+                print(f"Deleted vendor still found in get all vendors response")
+                return False
+        
+        print("Verify vendor gone test passed")
+        return True
 
 
 if __name__ == "__main__":
