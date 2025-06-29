@@ -192,6 +192,33 @@ async def get_vendor(vendor_id: str):
         logger.error(f"Error fetching vendor {vendor_id}: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to fetch vendor")
 
+@api_router.delete("/vendors/{vendor_id}")
+async def delete_vendor(vendor_id: str):
+    try:
+        # Check if vendor exists
+        vendor = await db.vendors.find_one({"id": vendor_id})
+        if not vendor:
+            raise HTTPException(status_code=404, detail="Vendor not found")
+        
+        # Delete the vendor
+        result = await db.vendors.delete_one({"id": vendor_id})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Vendor not found")
+        
+        logger.info(f"Vendor deleted successfully: {vendor_id}")
+        return {
+            "message": "Vendor deleted successfully",
+            "deleted_vendor_id": vendor_id,
+            "vendor_name": vendor.get("vendor_name", "Unknown")
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting vendor {vendor_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to delete vendor")
+
 # Include the router in the main app
 app.include_router(api_router)
 
