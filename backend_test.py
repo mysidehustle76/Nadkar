@@ -243,7 +243,7 @@ class TestVendorAPI:
         vendor_data = {
             "vendor_name": vendor_name,
             "service_provider_name": "Duplicate Name Provider",
-            "phone_number": "1112223333"
+            "phone_number": generate_random_phone()
         }
         
         response = self.create_vendor(vendor_data)
@@ -256,7 +256,7 @@ class TestVendorAPI:
         vendor_data = {
             "vendor_name": vendor_name,
             "service_provider_name": "Different Provider",
-            "phone_number": "4445556666"
+            "phone_number": generate_random_phone()
         }
         
         response = self.create_vendor(vendor_data)
