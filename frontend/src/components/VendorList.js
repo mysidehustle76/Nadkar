@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ConfirmationDialog from './ConfirmationDialog';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -8,6 +9,12 @@ const VendorList = ({ refreshTrigger }) => {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [deleteDialog, setDeleteDialog] = useState({
+    isOpen: false,
+    vendor: null,
+    isLoading: false
+  });
+  const [deleteMessage, setDeleteMessage] = useState(null);
 
   // Fetch vendors from API
   const fetchVendors = async () => {
@@ -28,6 +35,87 @@ const VendorList = ({ refreshTrigger }) => {
   useEffect(() => {
     fetchVendors();
   }, [refreshTrigger]);
+
+  // Handle delete vendor
+  const handleDeleteClick = (vendor) => {
+    setDeleteDialog({
+      isOpen: true,
+      vendor: vendor,
+      isLoading: false
+    });
+  };
+
+  // Confirm delete vendor
+  const handleDeleteConfirm = async () => {
+    const vendorToDelete = deleteDialog.vendor;
+    
+    setDeleteDialog(prev => ({ ...prev, isLoading: true }));
+    
+    try {
+      const response = await axios.delete(`${API}/vendors/${vendorToDelete.id}`);
+      
+      if (response.status === 200) {
+        // Remove vendor from local state
+        setVendors(prevVendors => 
+          prevVendors.filter(vendor => vendor.id !== vendorToDelete.id)
+        );
+        
+        // Show success message
+        setDeleteMessage({
+          type: 'success',
+          message: `Vendor "${vendorToDelete.vendor_name}" has been successfully deleted.`
+        });
+        
+        // Close dialog
+        setDeleteDialog({
+          isOpen: false,
+          vendor: null,
+          isLoading: false
+        });
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setDeleteMessage(null);
+        }, 5000);
+      }
+    } catch (err) {
+      console.error('Error deleting vendor:', err);
+      
+      let errorMessage = 'Failed to delete vendor. Please try again.';
+      
+      if (err.response?.status === 404) {
+        errorMessage = 'Vendor not found. It may have already been deleted.';
+      } else if (err.response?.data?.detail) {
+        errorMessage = err.response.data.detail;
+      }
+      
+      setDeleteMessage({
+        type: 'error',
+        message: errorMessage
+      });
+      
+      // Close dialog
+      setDeleteDialog({
+        isOpen: false,
+        vendor: null,
+        isLoading: false
+      });
+      
+      // Clear error message after 7 seconds
+      setTimeout(() => {
+        setDeleteMessage(null);
+      }, 7000);
+    }
+  };
+
+  // Cancel delete
+  const handleDeleteCancel = () => {
+    setDeleteDialog({
+      isOpen: false,
+      vendor: null,
+      isLoading: false
+    });
+  };
 
   // Format phone number for display
   const formatPhoneNumber = (phone) => {
@@ -109,6 +197,32 @@ const VendorList = ({ refreshTrigger }) => {
         </button>
       </div>
 
+      {/* Delete Success/Error Message */}
+      {deleteMessage && (
+        <div className={`mb-6 p-4 rounded-md ${
+          deleteMessage.type === 'success' 
+            ? 'bg-green-50 border border-green-200 text-green-800' 
+            : 'bg-red-50 border border-red-200 text-red-800'
+        }`}>
+          <div className="flex">
+            <div className="flex-shrink-0">
+              {deleteMessage.type === 'success' ? (
+                <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              )}
+            </div>
+            <div className="ml-3">
+              <p className="text-sm">{deleteMessage.message}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {vendors.length === 0 ? (
         <div className="text-center py-8">
           <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -144,6 +258,19 @@ const VendorList = ({ refreshTrigger }) => {
                       Added: {formatDate(vendor.created_at)}
                     </p>
                   </div>
+                  
+                  {/* Delete Button */}
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      onClick={() => handleDeleteClick(vendor)}
+                      className="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                    >
+                      <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -156,6 +283,19 @@ const VendorList = ({ refreshTrigger }) => {
           Total: {vendors.length} vendor{vendors.length !== 1 ? 's' : ''}
         </div>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={deleteDialog.isOpen}
+        title="Delete Vendor"
+        message={`Are you sure you want to delete "${deleteDialog.vendor?.vendor_name}"? This action cannot be undone.`}
+        confirmButtonText="Delete"
+        cancelButtonText="Cancel"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        isDestructive={true}
+        isLoading={deleteDialog.isLoading}
+      />
     </div>
   );
 };
