@@ -131,6 +131,67 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+# Vendor endpoints
+@api_router.post("/vendors", response_model=Vendor)
+async def create_vendor(vendor_input: VendorCreate):
+    try:
+        # Check if vendor with same name already exists
+        existing_vendor = await db.vendors.find_one({"vendor_name": vendor_input.vendor_name})
+        if existing_vendor:
+            raise HTTPException(
+                status_code=400, 
+                detail="A vendor with this name already exists"
+            )
+        
+        # Check if phone number is already registered
+        existing_phone = await db.vendors.find_one({"phone_number": vendor_input.phone_number})
+        if existing_phone:
+            raise HTTPException(
+                status_code=400, 
+                detail="This phone number is already registered with another vendor"
+            )
+        
+        # Create vendor object
+        vendor_dict = vendor_input.dict()
+        vendor_obj = Vendor(**vendor_dict)
+        
+        # Insert into database
+        result = await db.vendors.insert_one(vendor_obj.dict())
+        if not result.inserted_id:
+            raise HTTPException(status_code=500, detail="Failed to create vendor")
+        
+        return vendor_obj
+    
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error creating vendor: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@api_router.get("/vendors", response_model=List[Vendor])
+async def get_vendors():
+    try:
+        vendors = await db.vendors.find().sort("created_at", -1).to_list(1000)
+        return [Vendor(**vendor) for vendor in vendors]
+    except Exception as e:
+        logger.error(f"Error fetching vendors: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to fetch vendors")
+
+@api_router.get("/vendors/{vendor_id}", response_model=Vendor)
+async def get_vendor(vendor_id: str):
+    try:
+        vendor = await db.vendors.find_one({"id": vendor_id})
+        if not vendor:
+            raise HTTPException(status_code=404, detail="Vendor not found")
+        return Vendor(**vendor)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching vendor {vendor_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to fetch vendor")
+
 # Include the router in the main app
 app.include_router(api_router)
 
