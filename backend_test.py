@@ -123,11 +123,11 @@ class TestVendorAPI:
         """Test phone number validation with various formats"""
         print("Testing phone number validation...")
         
-        # Test valid phone number formats
+        # Test valid phone number formats - using different base numbers to avoid duplicates
         valid_formats = [
             {"format": "1234567890", "expected": "1234567890"},
-            {"format": "(123) 456-7890", "expected": "1234567890"},
-            {"format": "123-456-7890", "expected": "1234567890"}
+            {"format": "(123) 456-7891", "expected": "1234567891"},
+            {"format": "123-456-7892", "expected": "1234567892"}
         ]
         
         for i, test_case in enumerate(valid_formats):
