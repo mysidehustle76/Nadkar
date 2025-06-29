@@ -355,7 +355,7 @@ class TestVendorAPI:
         
         # Create a new vendor
         vendor_data = {
-            "vendor_name": "Get Specific Test Company",
+            "vendor_name": f"Get Specific Test Company {TEST_RUN_ID}",
             "service_provider_name": "Get Specific Test Provider",
             "phone_number": "7778889999"
         }
