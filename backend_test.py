@@ -137,7 +137,7 @@ class TestVendorAPI:
         
         for i, test_case in enumerate(valid_formats):
             vendor_data = {
-                "vendor_name": f"Phone Test Company {i}",
+                "vendor_name": f"Phone Test Company {i} {TEST_RUN_ID}",
                 "service_provider_name": f"Phone Test Provider {i}",
                 "phone_number": test_case["format"]
             }
