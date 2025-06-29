@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the new vendor management API endpoints that I just created. Here's what needs to be tested: **Backend API Endpoints to Test:** 1. **POST /api/vendors** - Create a new vendor 2. **GET /api/vendors** - Get all vendors 3. **GET /api/vendors/{vendor_id}** - Get a specific vendor"
+user_problem_statement: "Test the new vendor management API endpoints that I just created. Here's what needs to be tested: **Backend API Endpoints to Test:** 1. **POST /api/vendors** - Create a new vendor 2. **GET /api/vendors** - Get all vendors 3. **GET /api/vendors/{vendor_id}** - Get a specific vendor 4. **DELETE /api/vendors/{vendor_id}** - Delete a specific vendor"
 
 backend:
   - task: "POST /api/vendors - Create a new vendor"
@@ -152,6 +152,30 @@ backend:
         - working: true
           agent: "testing"
           comment: "Successfully tested retrieving a non-existent vendor. The API correctly returns 404 status code for non-existent vendor IDs."
+
+  - task: "DELETE /api/vendors/{vendor_id} - Delete a specific vendor"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Successfully tested valid vendor deletion. The API correctly deletes vendors and returns 200 status code with success message and deleted vendor details."
+        - working: true
+          agent: "testing"
+          comment: "Successfully tested deleting a non-existent vendor. The API correctly returns 404 status code for non-existent vendor IDs."
+        - working: true
+          agent: "testing"
+          comment: "Successfully tested deleting with invalid ID format. The API handles invalid ID formats gracefully."
+        - working: true
+          agent: "testing"
+          comment: "Successfully verified that deleted vendors are actually removed from the database. After deletion, attempts to fetch the vendor return 404 not found."
+        - working: true
+          agent: "testing"
+          comment: "Successfully verified that only the target vendor is deleted and other vendors remain unaffected in the database."
 
   - task: "Phone number validation"
     implemented: true
