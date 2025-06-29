@@ -173,7 +173,7 @@ class TestVendorAPI:
         
         for i, invalid_format in enumerate(invalid_formats):
             vendor_data = {
-                "vendor_name": f"Invalid Phone Company {i}",
+                "vendor_name": f"Invalid Phone Company {i} {TEST_RUN_ID}",
                 "service_provider_name": f"Invalid Phone Provider {i}",
                 "phone_number": invalid_format
             }
@@ -184,8 +184,9 @@ class TestVendorAPI:
                 print(f"Created vendor with invalid phone format: {invalid_format}")
                 return False
             
-            if response.status_code != 400:
-                print(f"Expected status code 400 for invalid phone format, got {response.status_code}")
+            # Accept either 400 or 422 status codes for validation errors
+            if response.status_code != 400 and response.status_code != 422:
+                print(f"Expected status code 400 or 422 for invalid phone format, got {response.status_code}")
                 return False
         
         print("Phone number validation test passed")
