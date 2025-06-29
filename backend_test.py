@@ -318,7 +318,7 @@ class TestVendorAPI:
         vendor_data = {
             "vendor_name": f"Get All Test Company {TEST_RUN_ID}",
             "service_provider_name": "Get All Test Provider",
-            "phone_number": "5554443333"
+            "phone_number": generate_random_phone()
         }
         
         create_response = self.create_vendor(vendor_data)
