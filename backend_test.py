@@ -275,8 +275,10 @@ class TestVendorAPI:
         """Test creating vendor with same phone number twice"""
         print("Testing duplicate phone number validation...")
         
-        # Create first vendor with unique name for this test
-        phone_number = f"9998887777"
+        # Generate a unique phone number for this test
+        phone_number = generate_random_phone()
+        
+        # Create first vendor with unique name and phone for this test
         vendor_data = {
             "vendor_name": f"Duplicate Phone Company {TEST_RUN_ID}",
             "service_provider_name": "Duplicate Phone Provider",
