@@ -304,7 +304,7 @@ class TestVendorAPI:
         
         # Create a new vendor to ensure there's at least one
         vendor_data = {
-            "vendor_name": "Get All Test Company",
+            "vendor_name": f"Get All Test Company {TEST_RUN_ID}",
             "service_provider_name": "Get All Test Provider",
             "phone_number": "5554443333"
         }
