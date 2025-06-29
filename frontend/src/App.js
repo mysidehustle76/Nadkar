@@ -25,17 +25,19 @@ const App = () => {
   const fetchVendors = async () => {
     try {
       setLoading(true);
+      // Always start with static vendors as fallback
+      setVendors(staticVendors);
+      
       const response = await fetch(`${BACKEND_URL}/api/vendors`);
       if (response.ok) {
         const data = await response.json();
-        setVendors(data);
-      } else {
-        // If no vendors in DB, use static data
-        setVendors(staticVendors);
+        if (data && data.length > 0) {
+          setVendors(data);
+        }
       }
     } catch (err) {
       console.error('Error fetching vendors:', err);
-      // Fallback to static data
+      // Ensure we always have static vendors
       setVendors(staticVendors);
     } finally {
       setLoading(false);
