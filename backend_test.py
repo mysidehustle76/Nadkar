@@ -6,6 +6,7 @@ import sys
 from dotenv import load_dotenv
 import uuid
 from datetime import datetime
+import random
 
 # Load environment variables from frontend/.env
 load_dotenv('/app/frontend/.env')
@@ -22,6 +23,10 @@ print(f"Using API URL: {API_URL}")
 
 # Generate a unique test run ID to avoid duplicate vendor names
 TEST_RUN_ID = datetime.now().strftime("%Y%m%d%H%M%S")
+
+# Generate a random phone number base to avoid duplicates
+def generate_random_phone():
+    return f"{random.randint(1000000000, 9999999999)}"
 
 # Test class for vendor management API
 class TestVendorAPI:
