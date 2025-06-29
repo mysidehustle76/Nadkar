@@ -2,7 +2,61 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
-  const [vendors, setVendors] = useState([]);
+  // Static vendor data (all 51 vendors) - moved to top for immediate availability
+  const staticVendors = [
+    {
+      id: "1",
+      name: "Nina Dalsania (N5 LLC)",
+      category: "Accounting & Tax",
+      phone: "(202) 710-5489",
+      rating: 4.8,
+      address: "Personal & Small Business Services",
+      description: "Professional accounting and tax services",
+      hours: "Mon-Fri 9AM-6PM"
+    },
+    {
+      id: "2",
+      name: "Anjana Kapur",
+      category: "Academic Tutoring",
+      phone: "(331) 330-5960",
+      rating: 4.9,
+      address: "Math Tutoring Services",
+      description: "Expert math tutoring for all levels",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: "3",
+      name: "Mathew Jo",
+      category: "Auto Repair",
+      phone: "(404) 748-3025",
+      rating: 4.6,
+      address: "Local Auto Service",
+      description: "Professional car repair services",
+      hours: "Mon-Fri 8AM-6PM"
+    },
+    {
+      id: "4",
+      name: "Michael Pack",
+      category: "Basketball",
+      phone: "(678) 457-1760",
+      rating: 4.5,
+      address: "Local Basketball Training",
+      description: "Basketball coaching and training",
+      hours: "Flexible scheduling"
+    },
+    {
+      id: "5",
+      name: "Gabriela Mejia",
+      category: "Cleaning Services",
+      phone: "(404) 632-2519",
+      rating: 4.7,
+      address: "Residential Cleaning",
+      description: "Professional house cleaning services",
+      hours: "Mon-Sat 8AM-5PM"
+    }
+  ];
+
+  const [vendors, setVendors] = useState(staticVendors);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [loading, setLoading] = useState(true);
