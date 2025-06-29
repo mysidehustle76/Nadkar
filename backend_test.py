@@ -92,11 +92,11 @@ class TestVendorAPI:
         """Test creating a vendor with valid data"""
         print("Testing valid vendor creation...")
         
-        # Test data with unique name
+        # Test data with unique name and phone
         vendor_data = {
             "vendor_name": f"ABC Corporation {TEST_RUN_ID}",
             "service_provider_name": "John Smith",
-            "phone_number": "1234567890"
+            "phone_number": generate_random_phone()
         }
         
         # Send request
