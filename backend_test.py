@@ -133,11 +133,16 @@ class TestVendorAPI:
         """Test phone number validation with various formats"""
         print("Testing phone number validation...")
         
-        # Test valid phone number formats - using different base numbers to avoid duplicates
+        # Generate base phone numbers for this test
+        base_phone1 = generate_random_phone()
+        base_phone2 = generate_random_phone()
+        base_phone3 = generate_random_phone()
+        
+        # Test valid phone number formats with unique numbers
         valid_formats = [
-            {"format": "1234567890", "expected": "1234567890"},
-            {"format": "(123) 456-7891", "expected": "1234567891"},
-            {"format": "123-456-7892", "expected": "1234567892"}
+            {"format": base_phone1, "expected": base_phone1},
+            {"format": f"({base_phone2[:3]}) {base_phone2[3:6]}-{base_phone2[6:]}", "expected": base_phone2},
+            {"format": f"{base_phone3[:3]}-{base_phone3[3:6]}-{base_phone3[6:]}", "expected": base_phone3}
         ]
         
         for i, test_case in enumerate(valid_formats):
