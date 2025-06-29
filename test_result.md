@@ -217,6 +217,7 @@ test_plan:
     - "GET /api/vendors - Get all vendors"
     - "GET /api/vendors/{vendor_id} - Get a specific vendor"
     - "Phone number validation"
+    - "DELETE /api/vendors/{vendor_id} - Delete a specific vendor"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
@@ -224,3 +225,5 @@ test_plan:
 agent_communication:
     - agent: "testing"
       message: "I have completed testing of all vendor management API endpoints. All tests are passing successfully. The API correctly handles vendor creation, validation, and retrieval as expected."
+    - agent: "testing"
+      message: "I have completed testing of the DELETE vendor functionality. All tests are passing successfully. The API correctly handles vendor deletion, including validation of non-existent vendors and ensuring deleted vendors are actually removed from the database."
