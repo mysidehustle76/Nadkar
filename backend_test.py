@@ -50,7 +50,11 @@ class TestVendorAPI:
             self.test_duplicate_vendor_name,
             self.test_duplicate_phone_number,
             self.test_get_all_vendors,
-            self.test_get_specific_vendor
+            self.test_get_specific_vendor,
+            self.test_valid_vendor_deletion,
+            self.test_delete_nonexistent_vendor,
+            self.test_delete_invalid_id_format,
+            self.test_verify_vendor_gone
         ]
         
         # Run each test
