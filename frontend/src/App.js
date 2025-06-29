@@ -201,14 +201,14 @@ const App = () => {
             <h3 className="text-lg font-bold mb-4">Add New Vendor</h3>
             <form onSubmit={addVendor} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Business Name *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Business Name / Contact *</label>
                 <input
                   type="text"
                   required
                   value={newVendor.name}
                   onChange={(e) => setNewVendor({...newVendor, name: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                  placeholder="Enter business name"
+                  placeholder="Enter business name or contact person"
                 />
               </div>
               
@@ -255,41 +255,6 @@ const App = () => {
                   <option value={4.5}>4.5 - Good</option>
                   <option value={4.0}>4.0 - Average</option>
                 </select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Address *</label>
-                <input
-                  type="text"
-                  required
-                  value={newVendor.address}
-                  onChange={(e) => setNewVendor({...newVendor, address: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                  placeholder="Business address or area"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Hours</label>
-                <input
-                  type="text"
-                  value={newVendor.hours}
-                  onChange={(e) => setNewVendor({...newVendor, hours: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                  placeholder="Mon-Fri 9AM-5PM"
-                />
-              </div>
-              
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
-                <textarea
-                  required
-                  value={newVendor.description}
-                  onChange={(e) => setNewVendor({...newVendor, description: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                  rows="3"
-                  placeholder="Brief description of services"
-                />
               </div>
               
               <div className="md:col-span-2">
