@@ -4,6 +4,7 @@ import { staticVendors } from './vendors';
 
 const App = () => {
   const [vendors, setVendors] = useState(staticVendors);
+  console.log('Current vendors count:', vendors.length); // Debug line
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [loading, setLoading] = useState(true);
