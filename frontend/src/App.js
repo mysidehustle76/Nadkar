@@ -202,10 +202,21 @@ const App = () => {
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
-                className="bg-yellow-400 text-white px-6 py-2 rounded-lg hover:bg-yellow-500 transition-colors"
-                style={{backgroundColor: '#facc15', color: 'white'}}
+                className="px-6 py-2 rounded-lg transition-colors"
+                style={{backgroundColor: '#eab308', color: 'white', border: 'none'}}
+                onMouseOver={(e) => e.target.style.backgroundColor = '#ca8a04'}
+                onMouseOut={(e) => e.target.style.backgroundColor = '#eab308'}
               >
                 {showAddForm ? 'Cancel' : 'Add New Vendor'}
+              </button>
+              <button
+                onClick={() => {
+                  setShowAdminPanel(false);
+                  setShowAddForm(false);
+                }}
+                className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Back to Main Page
               </button>
               <div className="text-gray-600 flex items-center">
                 Total Vendors: <span className="font-bold ml-1">{vendors.length}</span>
