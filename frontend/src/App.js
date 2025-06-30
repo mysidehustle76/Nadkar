@@ -176,7 +176,7 @@ const App = () => {
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
-                className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                className="bg-yellow-400 text-white px-6 py-2 rounded-lg hover:bg-yellow-500 transition-colors"
               >
                 {showAddForm ? 'Cancel' : 'Add New Vendor'}
               </button>
