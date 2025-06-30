@@ -175,7 +175,8 @@ const App = () => {
       
       if (response.ok) {
         const result = await response.json();
-        alert(result.message);
+        // Silently handle the result without showing alert
+        console.log('Seed result:', result.message);
         fetchVendors(); // Refresh the list
       }
     } catch (err) {
