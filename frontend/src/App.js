@@ -177,26 +177,9 @@ const App = () => {
         <img 
           src="https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=1920&height=1168&fit=bounds&ois=2c7ddaf" 
           alt="Bellmoore Park Community" 
-          className="w-full h-48 object-cover"
+          className="w-full h-64 object-cover"
         />
       </section>
-
-      {/* Admin Panel Toggle */}
-      {/* Header with Add Vendor Button */}
-      <div className="bg-yellow-400 py-2">
-        <div className="container mx-auto px-4 flex justify-center items-center relative">
-          <h1 className="text-2xl font-bold text-white">BMP Yellow Pages</h1>
-          <button
-            onClick={() => setShowAddForm(!showAddForm)}
-            className="px-4 py-2 rounded-lg font-semibold transition-colors absolute right-4"
-            style={{backgroundColor: '#eab308', color: 'white', border: 'none'}}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#ca8a04'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#eab308'}
-          >
-            {showAddForm ? 'Cancel' : 'Add a new vendor'}
-          </button>
-        </div>
-      </div>
 
       {/* Add Vendor Form */}
       {showAddForm && (
