@@ -240,8 +240,16 @@ const App = () => {
     return phone;
   };
 
-  // Format business name to proper Title Case
-  const formatBusinessName = (name) => {
+  // Format category name to Title Case for consistency
+  const formatCategoryName = (category) => {
+    if (!category) return category;
+    
+    return category
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
     if (!name) return name;
     
     return name
