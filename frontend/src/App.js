@@ -315,23 +315,6 @@ const App = () => {
                 />
               </div>
               
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-                <select
-                  value={newVendor.rating}
-                  onChange={(e) => setNewVendor({...newVendor, rating: parseFloat(e.target.value)})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                >
-                  <option value={5.0}>5.0 - Excellent</option>
-                  <option value={4.9}>4.9 - Outstanding</option>
-                  <option value={4.8}>4.8 - Very Good</option>
-                  <option value={4.7}>4.7 - Very Good</option>
-                  <option value={4.6}>4.6 - Good</option>
-                  <option value={4.5}>4.5 - Good</option>
-                  <option value={4.0}>4.0 - Average</option>
-                </select>
-              </div>
-              
               <div className="md:col-span-2">
                 <button
                   type="submit"
