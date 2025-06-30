@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test and showcase the Yellow Pages app I just built. Please demonstrate all the key features: 1. Show the main landing page with the professional Yellow Pages design 2. Test the search functionality - search for different business types like 'coffee', 'auto', 'dental' 3. Test the category filtering - select different categories like 'Restaurants', 'Healthcare', 'Automotive' 4. Test the rating filtering - try filtering by 4.5+ stars, 4.0+ stars 5. Test the phone number clicking functionality 6. Show how the vendor cards look with all the business information (name, rating stars, address, hours, description) 7. Test the responsive design by resizing the window 8. Show the empty state when no results are found 9. Demonstrate the overall user experience and visual appeal"
+user_problem_statement: "Integrate backend data persistence for the Yellow Pages app. Migrate the 51 static vendors to MongoDB database, update frontend to fetch from backend API, and ensure full CRUD operations work with persistent storage. This will make the application truly dynamic and set the foundation for future enhancements."
 
 frontend:
   - task: "Main landing page with Yellow Pages design"
