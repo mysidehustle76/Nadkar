@@ -186,6 +186,7 @@ const App = () => {
           <button
             onClick={() => setShowAdminPanel(!showAdminPanel)}
             className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-700 transition-colors absolute right-4"
+            style={{backgroundColor: '#ca8a04', color: 'white'}}
           >
             {showAdminPanel ? 'Cancel' : 'Add a new vendor'}
           </button>
