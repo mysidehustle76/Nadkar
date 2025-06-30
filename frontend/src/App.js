@@ -184,8 +184,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Just use static vendors - don't fetch from API
-    setLoading(false);
+    fetchVendors();
   }, []);
 
   useEffect(() => {
