@@ -315,7 +315,8 @@ const App = () => {
     return !name.startsWith('test') && 
            !name.startsWith('nitin') && 
            category !== 'format test' && 
-           category !== 'executive coaching';
+           category !== 'executive coaching' &&
+           category !== 'business consulting';
   });
 
   // Only show categories that have associated vendors (after filtering), but keep standard categories for new additions
