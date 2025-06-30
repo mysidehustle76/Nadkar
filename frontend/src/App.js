@@ -60,7 +60,7 @@ const App = () => {
     const formattedPhone = formatPhoneNumber(newVendor.phone);
     
     // Check for duplicate phone number (hard validation)
-    const duplicatePhone = vendors.find(vendor => 
+    const duplicatePhone = filteredVendors.find(vendor => 
       formatPhoneNumber(vendor.phone) === formattedPhone
     );
     
@@ -70,7 +70,7 @@ const App = () => {
     }
     
     // Check for duplicate business name (soft warning)
-    const duplicateName = vendors.find(vendor => 
+    const duplicateName = filteredVendors.find(vendor => 
       vendor.name.toLowerCase().trim() === newVendor.name.toLowerCase().trim()
     );
     
