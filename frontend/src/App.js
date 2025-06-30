@@ -19,7 +19,7 @@ const App = () => {
     phone: '',
     rating: 4.5,
     address: 'Bellmoore Park Community',
-    description: 'Community business',
+    description: '',
     hours: 'Contact for hours'
   });
 
