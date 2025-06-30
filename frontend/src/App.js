@@ -259,8 +259,8 @@ const App = () => {
 
       {/* Vendors List */}
       <main className="container mx-auto px-4 py-8">
-        {/* Category Filter */}
-        <div className="mb-6">
+        {/* Category Filter and Add Vendor Button */}
+        <div className="mb-6 flex flex-col md:flex-row gap-4 items-start md:items-center">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
@@ -271,6 +271,16 @@ const App = () => {
               <option key={category} value={category}>{category}</option>
             ))}
           </select>
+          
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <span>{showAddForm ? 'Cancel' : 'Add a new vendor'}</span>
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
