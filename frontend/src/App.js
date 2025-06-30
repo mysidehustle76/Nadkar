@@ -177,7 +177,7 @@ const App = () => {
         <img 
           src="https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=1920&height=1168&fit=bounds&ois=2c7ddaf" 
           alt="Bellmoore Park Community" 
-          className="w-full h-64 object-cover"
+          className="w-full h-80 object-cover"
         />
       </section>
 
