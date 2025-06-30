@@ -8,6 +8,7 @@ const App = () => {
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   // Form state for adding new vendor
   const [newVendor, setNewVendor] = useState({
