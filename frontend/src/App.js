@@ -86,9 +86,10 @@ const App = () => {
       }
     }
     
-    // Format phone number before saving
+    // Format phone number and business name before saving
     const formattedVendor = {
       ...newVendor,
+      name: formatBusinessName(newVendor.name),
       phone: formattedPhone
     };
     
