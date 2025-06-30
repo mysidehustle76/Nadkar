@@ -180,17 +180,18 @@ const App = () => {
       </section>
 
       {/* Admin Panel Toggle */}
+      {/* Header with Add Vendor Button */}
       <div className="bg-yellow-400 py-2">
-        <div className="container mx-auto px-4 flex justify-center items-center">
+        <div className="container mx-auto px-4 flex justify-center items-center relative">
           <h1 className="text-2xl font-bold text-white">BMP Yellow Pages</h1>
           <button
-            onClick={() => setShowAdminPanel(!showAdminPanel)}
+            onClick={() => setShowAddForm(!showAddForm)}
             className="px-4 py-2 rounded-lg font-semibold transition-colors absolute right-4"
             style={{backgroundColor: '#eab308', color: 'white', border: 'none'}}
             onMouseOver={(e) => e.target.style.backgroundColor = '#ca8a04'}
             onMouseOut={(e) => e.target.style.backgroundColor = '#eab308'}
           >
-            {showAdminPanel ? 'Cancel' : 'Add a new vendor'}
+            {showAddForm ? 'Cancel' : 'Add a new vendor'}
           </button>
         </div>
       </div>
