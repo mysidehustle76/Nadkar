@@ -254,9 +254,33 @@ frontend:
     priority: "high"
     needs_retesting: false
     status_history:
-        -working: "NA"
+        -working: true
         -agent: "testing"
         -comment: "Tested the 'Add a new vendor' functionality. The feature works correctly. The 'Add a new vendor' button is visible next to the category dropdown. Clicking it displays a form with fields for business name, category, phone number, and rating. All form validation works properly - empty required fields are caught. Successfully added a test vendor with the information provided, and verified it appeared in the vendor grid with the correct information. The vendor count increased from 51 to 52. The form closes after successful submission. For cancellation, there is a 'Cancel' button that appears in place of the 'Add a new vendor' button when the form is open, which successfully closes the form when clicked."
+
+  - task: "Frontend integration with backend API"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Frontend currently uses static data. Need to enable fetchVendors() function and integrate with backend API"
+
+  - task: "Dynamic vendor loading from database"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Need to modify frontend to fetch vendors from backend on component mount instead of using static data"
 
 metadata:
   created_by: "testing_agent"
