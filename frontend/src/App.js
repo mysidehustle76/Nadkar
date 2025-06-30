@@ -459,7 +459,7 @@ const App = () => {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-4">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-gray-500">© 2025 Designed and created by Nitin Nadkar. All rights reserved.</p>
+          <p className="text-sm text-white">© 2025 Designed and created by Nitin Nadkar. Plagiarism is strictly prohibited by your conscience.</p>
         </div>
       </footer>
     </div>
