@@ -276,15 +276,6 @@ const App = () => {
                     <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
                       {vendor.category}
                     </span>
-                    {showAdminPanel && (
-                      <button
-                        onClick={() => deleteVendor(vendor.id)}
-                        className="bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600 transition-colors"
-                        title="Delete vendor"
-                      >
-                        ✕
-                      </button>
-                    )}
                   </div>
                 </div>
 
