@@ -367,12 +367,15 @@ backend:
 
   - task: "API endpoints for vendor management"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "All CRUD endpoints exist: GET /api/vendors, POST /api/vendors, PUT /api/vendors/{id}, DELETE /api/vendors/{id}, POST /api/vendors/seed"
+        -working: true
+        -agent: "testing"
+        -comment: "Verified that all CRUD operations work correctly. GET /api/vendors successfully retrieves all vendors. POST /api/vendors successfully adds a new vendor. DELETE /api/vendors/{id} successfully removes a vendor. The frontend correctly integrates with these endpoints for vendor management."
