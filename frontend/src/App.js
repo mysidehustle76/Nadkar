@@ -349,18 +349,21 @@ const App = () => {
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-                <select
+                <input
+                  type="text"
+                  list="categories"
                   required
                   value={newVendor.category}
                   onChange={(e) => setNewVendor({...newVendor, category: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                >
-                  <option value="">Select a category</option>
+                  placeholder="Select existing category or type new one"
+                />
+                <datalist id="categories">
                   {allCategories.map(category => (
-                    <option key={category} value={category}>{category}</option>
+                    <option key={category} value={category} />
                   ))}
-                  <option value="Other">Other</option>
-                </select>
+                </datalist>
+                <p className="text-xs text-gray-500 mt-1">Choose from dropdown or type a new category (e.g., "Life Coaching")</p>
               </div>
               
               <div>
