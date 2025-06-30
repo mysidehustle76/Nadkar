@@ -188,6 +188,28 @@ const App = () => {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    // Show scroll to top button when user scrolls down
+    const handleScroll = () => {
+      if (window.pageYOffset > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const handlePhoneClick = (phone) => {
     window.location.href = `tel:${phone}`;
   };
