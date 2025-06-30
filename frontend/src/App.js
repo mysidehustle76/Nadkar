@@ -501,7 +501,7 @@ const App = () => {
         )}
 
         {/* Empty state when no vendors found and form is not open */}
-        {!showAddForm && vendors.length === 0 && !loading && (
+        {!showAddForm && filteredVendors.length === 0 && !loading && (
           <div className="text-center py-12">
             <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m5 0v-5a2 2 0 10-4 0v5m0 0H7" />
