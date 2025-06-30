@@ -157,11 +157,11 @@ const App = () => {
 
       {/* Admin Panel Toggle */}
       <div className="bg-yellow-400 py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 flex justify-center items-center">
           <h1 className="text-2xl font-bold text-white">BMP Yellow Pages</h1>
           <button
             onClick={() => setShowAdminPanel(!showAdminPanel)}
-            className="bg-white text-yellow-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            className="bg-white text-yellow-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors absolute right-4"
           >
             {showAdminPanel ? 'Cancel' : 'Add a new vendor'}
           </button>
