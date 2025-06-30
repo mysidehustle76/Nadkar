@@ -185,8 +185,10 @@ const App = () => {
           <h1 className="text-2xl font-bold text-white">BMP Yellow Pages</h1>
           <button
             onClick={() => setShowAdminPanel(!showAdminPanel)}
-            className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-700 transition-colors absolute right-4"
-            style={{backgroundColor: '#ca8a04', color: 'white'}}
+            className="px-4 py-2 rounded-lg font-semibold transition-colors absolute right-4"
+            style={{backgroundColor: '#eab308', color: 'white', border: 'none'}}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#ca8a04'}
+            onMouseOut={(e) => e.target.style.backgroundColor = '#eab308'}
           >
             {showAdminPanel ? 'Cancel' : 'Add a new vendor'}
           </button>
