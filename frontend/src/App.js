@@ -51,7 +51,7 @@ const App = () => {
     e.preventDefault();
     
     // Validate required fields
-    if (!newVendor.name || !newVendor.category || !newVendor.phone || !newVendor.description) {
+    if (!newVendor.name || !newVendor.category || !newVendor.phone) {
       alert('Please fill in all required fields');
       return;
     }
