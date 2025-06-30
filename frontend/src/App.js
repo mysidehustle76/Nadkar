@@ -266,7 +266,32 @@ const App = () => {
       .trim();
   };
 
-  const categories = [...new Set(vendors.map(vendor => vendor.category))].sort();
+  // Get all unique categories from vendors + standard categories
+  const standardCategories = [
+    "Academic Tutoring", "Accounting & Tax", "Air Conditioning & Heating", "Appliance Repair",
+    "Auto Dealers", "Auto Repair", "Banks & Credit Unions", "Barbers & Hair Salons",
+    "Beauty & Wellness", "Bicycle Sales & Service", "Building Materials", "Catering",
+    "Childcare & Preschools", "Children's Clothing", "Cleaning Services", "Computer Services",
+    "Construction & Contractors", "Custom T-Shirts", "Dance & Music Lessons", "Dental",
+    "Dry Cleaners", "Electrical", "Electronics", "Emergency Services", "Employment Services",
+    "Entertainment", "Event Planning", "Financial Services", "Fitness & Gyms", "Flooring",
+    "Florists", "Funeral Homes", "Furniture Stores", "Garage Door", "Garden Centers",
+    "Gas Stations", "Grocery Stores", "Gutter Services", "Handyman", "Hardware Stores",
+    "Health & Medical", "Home Improvement", "Home Security", "Hotels & Lodging",
+    "Household Help", "Insurance", "Internet Services", "Jewelry", "Landscaping",
+    "Laundry Services", "Legal Services", "Libraries", "Locksmiths", "Medical Equipment",
+    "Mortgage", "Moving & Storage", "Music Lessons", "Optometrists", "Painting",
+    "Pediatricians", "Pest Control", "Pet Services", "Pharmacies", "Photography",
+    "Physical Therapy", "Plumbing", "Printing Services", "Real Estate", "Restaurants",
+    "Roofing", "Schools", "Security Systems", "Shoe Repair", "Shopping Centers",
+    "Sports & Recreation", "Storage Facilities", "Tax Services", "Taxi & Transportation",
+    "Telecommunications", "Travel Agencies", "Tree Services", "Upholstery", "Utilities",
+    "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
+  ];
+
+  // Combine existing vendor categories with standard categories
+  const vendorCategories = [...new Set(vendors.map(vendor => vendor.category))];
+  const allCategories = [...new Set([...vendorCategories, ...standardCategories])].sort();
 
 
 
