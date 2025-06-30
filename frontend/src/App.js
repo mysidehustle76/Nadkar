@@ -449,7 +449,7 @@ const App = () => {
                 }
                 return a.category.localeCompare(b.category);
               }) : 
-              vendors.filter(vendor => vendor.category === selectedCategory).sort((a, b) => a.name.localeCompare(b.name))
+              vendors.filter(vendor => vendor.category.toLowerCase() === selectedCategory.toLowerCase()).sort((a, b) => a.name.localeCompare(b.name))
             ).map(vendor => (
               <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <div className="p-6">
