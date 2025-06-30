@@ -381,7 +381,7 @@ const App = () => {
                   placeholder="Select existing category or type new one"
                 />
                 <datalist id="categories">
-                  {allCategories.map(category => (
+                  {allCategoriesForForm.map(category => (
                     <option key={category} value={category} />
                   ))}
                 </datalist>
