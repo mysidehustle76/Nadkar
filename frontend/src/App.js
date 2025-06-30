@@ -18,7 +18,7 @@ const App = () => {
     phone: '',
     rating: 4.5,
     address: 'Bellmoore Park Community',
-    description: '',
+    description: 'Contact for more information',
     hours: 'Contact for hours'
   });
 
