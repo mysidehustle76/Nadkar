@@ -354,6 +354,18 @@ const App = () => {
               </div>
               
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Business Description *</label>
+                <input
+                  type="text"
+                  required
+                  value={newVendor.description}
+                  onChange={(e) => setNewVendor({...newVendor, description: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  placeholder="Enter business description"
+                />
+              </div>
+              
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                 <input
                   type="text"
