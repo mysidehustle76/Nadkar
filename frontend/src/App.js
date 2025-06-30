@@ -308,9 +308,12 @@ const App = () => {
     "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
   ];
 
-  // Combine existing vendor categories with standard categories - recalculate when vendors change
+  // Only show categories that have associated vendors, but keep standard categories for new additions
   const vendorCategories = [...new Set(vendors.map(vendor => vendor.category))];
-  const allCategories = [...new Set([...vendorCategories, ...standardCategories])].sort();
+  // For the dropdown, only show categories that actually have vendors
+  const allCategories = vendorCategories.sort();
+  // For the form datalist, include standard categories to allow new additions
+  const allCategoriesForForm = [...new Set([...vendorCategories, ...standardCategories])].sort();
 
 
 
