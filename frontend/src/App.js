@@ -464,7 +464,7 @@ const App = () => {
             ).map(vendor => (
               <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
+                  <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-semibold text-gray-800">{formatBusinessName(vendor.name)}</h3>
                     <div className="flex items-center space-x-2">
                       <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
@@ -472,6 +472,8 @@ const App = () => {
                       </span>
                     </div>
                   </div>
+
+                  <p className="text-gray-600 mb-4">{vendor.description}</p>
 
                   <button
                     onClick={() => handlePhoneClick(vendor.phone)}
