@@ -180,12 +180,6 @@ const App = () => {
               >
                 {showAddForm ? 'Cancel' : 'Add New Vendor'}
               </button>
-              <button
-                onClick={seedDatabase}
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Seed Database
-              </button>
               <div className="text-gray-600 flex items-center">
                 Total Vendors: <span className="font-bold ml-1">{vendors.length}</span>
               </div>
