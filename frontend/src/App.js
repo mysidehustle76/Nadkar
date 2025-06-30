@@ -293,16 +293,19 @@ const App = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Category Filter and Add Vendor Button */}
         <div className="mb-6 flex flex-col md:flex-row gap-4 items-start md:items-center">
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-          >
-            <option value="">All Categories</option>
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
+          {/* Only show category dropdown when form is not open */}
+          {!showAddForm && (
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            >
+              <option value="">All Categories</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          )}
           
           {/* Only show Add Vendor button when form is not open */}
           {!showAddForm && (
