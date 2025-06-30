@@ -135,7 +135,7 @@ const App = () => {
         phone: '',
         rating: 4.5,
         address: 'Bellmoore Park Community',
-        description: 'Contact for more information',
+        description: '',
         hours: 'Contact for hours'
       });
       setShowAddForm(false);
