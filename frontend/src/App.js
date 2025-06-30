@@ -10,6 +10,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Form state for adding new vendor
   const [newVendor, setNewVendor] = useState({
