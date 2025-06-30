@@ -324,14 +324,26 @@ const App = () => {
             <h3 className="text-lg font-bold mb-4">Add New Vendor</h3>
             <form onSubmit={addVendor} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Business Name / Contact *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Contact Name *</label>
                 <input
                   type="text"
                   required
                   value={newVendor.name}
                   onChange={(e) => setNewVendor({...newVendor, name: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                  placeholder="Enter business name or contact person"
+                  placeholder="Enter contact name"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Business Description *</label>
+                <input
+                  type="text"
+                  required
+                  value={newVendor.description}
+                  onChange={(e) => setNewVendor({...newVendor, description: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  placeholder="Enter business description"
                 />
               </div>
               
