@@ -57,10 +57,39 @@ const App = () => {
       return;
     }
     
+    // Format phone number for comparison
+    const formattedPhone = formatPhoneNumber(newVendor.phone);
+    
+    // Check for duplicate phone number (hard validation)
+    const duplicatePhone = vendors.find(vendor => 
+      formatPhoneNumber(vendor.phone) === formattedPhone
+    );
+    
+    if (duplicatePhone) {
+      alert(`This phone number (${formattedPhone}) already exists for "${duplicatePhone.name}". Please check if this is a duplicate entry.`);
+      return;
+    }
+    
+    // Check for duplicate business name (soft warning)
+    const duplicateName = vendors.find(vendor => 
+      vendor.name.toLowerCase().trim() === newVendor.name.toLowerCase().trim()
+    );
+    
+    if (duplicateName) {
+      const proceed = window.confirm(
+        `A business with the name "${newVendor.name}" already exists. ` +
+        `This could be a duplicate entry or a legitimate similar business name. ` +
+        `Do you want to proceed anyway?`
+      );
+      if (!proceed) {
+        return;
+      }
+    }
+    
     // Format phone number before saving
     const formattedVendor = {
       ...newVendor,
-      phone: formatPhoneNumber(newVendor.phone)
+      phone: formattedPhone
     };
     
     try {
