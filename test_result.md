@@ -301,12 +301,7 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus:
-    - "Update vendor seed endpoint with all 51 vendors"
-    - "MongoDB vendor storage and retrieval"
-    - "API endpoints for vendor management"
-    - "Frontend integration with backend API"
-    - "Dynamic vendor loading from database"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
