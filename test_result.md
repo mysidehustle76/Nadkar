@@ -242,6 +242,18 @@ frontend:
         -working: true
         -agent: "testing"
         -comment: "The overall user experience and visual appeal are excellent. The app has consistent yellow branding throughout, professional styling with shadows and rounded corners, clear typography, and intuitive layout. The business cards are visually appealing with good spacing and organization of information."
+        
+  - task: "Add a new vendor functionality"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: "NA"
+        -agent: "testing"
+        -comment: "Tested the 'Add a new vendor' functionality. The feature works correctly. The 'Add a new vendor' button is visible next to the category dropdown. Clicking it displays a form with fields for business name, category, phone number, and rating. All form validation works properly - empty required fields are caught. Successfully added a test vendor with the information provided, and verified it appeared in the vendor grid with the correct information. The vendor count increased from 51 to 52. The form closes after successful submission. For cancellation, there is a 'Cancel' button that appears in place of the 'Add a new vendor' button when the form is open, which successfully closes the form when clicked."
 
 metadata:
   created_by: "testing_agent"
