@@ -98,11 +98,6 @@ async def create_vendor(vendor: VendorCreate):
     vendor_dict = vendor.dict()
     vendor_obj = Vendor(**vendor_dict)
     
-    # Check if vendor with same name already exists
-    existing_vendor = await db.vendors.find_one({"name": vendor_obj.name})
-    if existing_vendor:
-        raise HTTPException(status_code=400, detail="Vendor with this name already exists")
-    
     await db.vendors.insert_one(vendor_obj.dict())
     return vendor_obj
 
