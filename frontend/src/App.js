@@ -201,6 +201,7 @@ const App = () => {
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
                 className="bg-yellow-400 text-white px-6 py-2 rounded-lg hover:bg-yellow-500 transition-colors"
+                style={{backgroundColor: '#facc15', color: 'white'}}
               >
                 {showAddForm ? 'Cancel' : 'Add New Vendor'}
               </button>
