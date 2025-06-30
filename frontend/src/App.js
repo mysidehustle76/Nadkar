@@ -57,13 +57,19 @@ const App = () => {
       return;
     }
     
+    // Format phone number before saving
+    const formattedVendor = {
+      ...newVendor,
+      phone: formatPhoneNumber(newVendor.phone)
+    };
+    
     try {
       const response = await fetch(`${BACKEND_URL}/api/vendors`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newVendor),
+        body: JSON.stringify(formattedVendor),
       });
 
       if (response.ok) {
@@ -88,7 +94,7 @@ const App = () => {
       console.error('Error adding vendor:', err);
       // Fallback: Add directly to local state if API fails
       const newVendorWithId = {
-        ...newVendor,
+        ...formattedVendor,
         id: Date.now().toString() // Simple ID generation
       };
       setVendors(prev => [...prev, newVendorWithId]);
