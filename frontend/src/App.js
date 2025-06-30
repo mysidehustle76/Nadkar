@@ -89,6 +89,7 @@ const App = () => {
     const formattedVendor = {
       ...newVendor,
       name: formatBusinessName(newVendor.name),
+      category: formatCategoryName(newVendor.category),
       phone: formattedPhone
     };
     
