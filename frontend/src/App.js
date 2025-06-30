@@ -16,9 +16,9 @@ const App = () => {
     category: '',
     phone: '',
     rating: 4.5,
-    address: '',
-    description: '',
-    hours: 'Mon-Fri 9AM-5PM'
+    address: 'Bellmoore Park Community',
+    description: 'Community business',
+    hours: 'Contact for hours'
   });
 
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
