@@ -463,14 +463,14 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Group vendors by category and sort them */}
             {(selectedCategory === '' ? 
-              vendors.sort((a, b) => {
+              filteredVendors.sort((a, b) => {
                 // First sort by category, then by name within category
                 if (a.category === b.category) {
                   return a.name.localeCompare(b.name);
                 }
                 return a.category.localeCompare(b.category);
               }) : 
-              vendors.filter(vendor => vendor.category.toLowerCase() === selectedCategory.toLowerCase()).sort((a, b) => a.name.localeCompare(b.name))
+              filteredVendors.filter(vendor => vendor.category.toLowerCase() === selectedCategory.toLowerCase()).sort((a, b) => a.name.localeCompare(b.name))
             ).map(vendor => (
               <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <div className="p-6">
