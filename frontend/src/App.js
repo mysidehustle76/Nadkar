@@ -457,11 +457,9 @@ const App = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
+      <footer className="bg-gray-800 text-white py-4">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-xl font-semibold mb-4">BMP Yellow Pages</h3>
-          <p className="text-gray-400 mb-4">www.bmpyellowpages.com - Connecting our community since 2025</p>
-          <p className="text-sm text-gray-500">© 2025 BMP Yellow Pages. All rights reserved.</p>
+          <p className="text-sm text-gray-500">© 2025 All rights reserved.</p>
         </div>
       </footer>
     </div>
