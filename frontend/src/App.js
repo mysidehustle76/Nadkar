@@ -146,7 +146,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchVendors();
+    // Just use static vendors - don't fetch from API
+    setLoading(false);
   }, []);
 
   const handlePhoneClick = (phone) => {
