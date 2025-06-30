@@ -196,37 +196,6 @@ const App = () => {
         </div>
       </div>
 
-      {/* Add Vendor Panel */}
-      {showAdminPanel && (
-        <div className="bg-white border-b shadow-md">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => setShowAddForm(!showAddForm)}
-                className="px-6 py-2 rounded-lg transition-colors"
-                style={{backgroundColor: '#eab308', color: 'white', border: 'none'}}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#ca8a04'}
-                onMouseOut={(e) => e.target.style.backgroundColor = '#eab308'}
-              >
-                {showAddForm ? 'Cancel' : 'Add New Vendor'}
-              </button>
-              <button
-                onClick={() => {
-                  setShowAdminPanel(false);
-                  setShowAddForm(false);
-                }}
-                className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
-              >
-                Back to Main Page
-              </button>
-              <div className="text-gray-600 flex items-center">
-                Total Vendors: <span className="font-bold ml-1">{vendors.length}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Add Vendor Form */}
       {showAddForm && (
         <div className="bg-gray-100 border-b">
@@ -293,16 +262,9 @@ const App = () => {
               <div className="md:col-span-2">
                 <button
                   type="submit"
-                  className="bg-yellow-400 text-white px-6 py-3 rounded-lg hover:bg-yellow-500 font-semibold transition-colors mr-4"
+                  className="bg-yellow-400 text-white px-6 py-3 rounded-lg hover:bg-yellow-500 font-semibold transition-colors"
                 >
                   Add Vendor
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowAddForm(false)}
-                  className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 font-semibold transition-colors"
-                >
-                  Cancel
                 </button>
               </div>
             </form>
