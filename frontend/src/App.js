@@ -308,8 +308,14 @@ const App = () => {
     "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
   ];
 
-  // Only show categories that have associated vendors, but keep standard categories for new additions
-  const vendorCategories = [...new Set(vendors.map(vendor => vendor.category))];
+  // Filter out test vendors and Nitin entries
+  const filteredVendors = vendors.filter(vendor => {
+    const name = vendor.name.toLowerCase();
+    return !name.startsWith('test') && !name.startsWith('nitin');
+  });
+
+  // Only show categories that have associated vendors (after filtering), but keep standard categories for new additions
+  const vendorCategories = [...new Set(filteredVendors.map(vendor => vendor.category))];
   // For the dropdown, only show categories that actually have vendors
   const allCategories = vendorCategories.sort();
   // For the form datalist, include standard categories to allow new additions
