@@ -272,6 +272,7 @@ test_plan:
     - "Responsive design"
     - "Empty state when no results found"
     - "Overall user experience and visual appeal"
+    - "Add a new vendor functionality"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
