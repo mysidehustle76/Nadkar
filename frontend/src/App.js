@@ -280,7 +280,7 @@ const App = () => {
     "Childcare & Preschools", "Children's Clothing", "Cleaning Services", "Computer Services",
     "Construction & Contractors", "Custom T-Shirts", "Dance & Music Lessons", "Dental",
     "Dry Cleaners", "Electrical", "Electronics", "Emergency Services", "Employment Services",
-    "Entertainment", "Event Planning", "Financial Services", "Fitness & Gyms", "Flooring",
+    "Entertainment", "Event Planning", "Executive Coaching", "Financial Services", "Fitness & Gyms", "Flooring",
     "Florists", "Funeral Homes", "Furniture Stores", "Garage Door", "Garden Centers",
     "Gas Stations", "Grocery Stores", "Gutter Services", "Handyman", "Hardware Stores",
     "Health & Medical", "Home Improvement", "Home Security", "Hotels & Lodging",
@@ -295,7 +295,7 @@ const App = () => {
     "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
   ];
 
-  // Combine existing vendor categories with standard categories
+  // Combine existing vendor categories with standard categories - recalculate when vendors change
   const vendorCategories = [...new Set(vendors.map(vendor => vendor.category))];
   const allCategories = [...new Set([...vendorCategories, ...standardCategories])].sort();
 
