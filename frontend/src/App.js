@@ -318,56 +318,60 @@ const App = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Group vendors by category and sort them */}
-          {(selectedCategory === '' ? 
-            vendors.sort((a, b) => {
-              // First sort by category, then by name within category
-              if (a.category === b.category) {
-                return a.name.localeCompare(b.name);
-              }
-              return a.category.localeCompare(b.category);
-            }) : 
-            vendors.filter(vendor => vendor.category === selectedCategory).sort((a, b) => a.name.localeCompare(b.name))
-          ).map(vendor => (
-            <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold text-gray-800">{vendor.name}</h3>
-                  <div className="flex items-center space-x-2">
-                    <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
-                      {vendor.category}
-                    </span>
+        {/* Vendor Grid - Only show when form is not open */}
+        {!showAddForm && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Group vendors by category and sort them */}
+            {(selectedCategory === '' ? 
+              vendors.sort((a, b) => {
+                // First sort by category, then by name within category
+                if (a.category === b.category) {
+                  return a.name.localeCompare(b.name);
+                }
+                return a.category.localeCompare(b.category);
+              }) : 
+              vendors.filter(vendor => vendor.category === selectedCategory).sort((a, b) => a.name.localeCompare(b.name))
+            ).map(vendor => (
+              <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-semibold text-gray-800">{vendor.name}</h3>
+                    <div className="flex items-center space-x-2">
+                      <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
+                        {vendor.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <p className="text-gray-600 mb-3">{vendor.description}</p>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-gray-700">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <p className="text-gray-600 mb-3">{vendor.description}</p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center text-gray-700">
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="text-sm">{vendor.address}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => handlePhoneClick(vendor.phone)}
+                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <span className="text-sm">{vendor.address}</span>
-                  </div>
+                    <span>{formatPhoneNumber(vendor.phone)}</span>
+                  </button>
                 </div>
-
-                <button
-                  onClick={() => handlePhoneClick(vendor.phone)}
-                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span>{formatPhoneNumber(vendor.phone)}</span>
-                </button>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {vendors.length === 0 && !loading && (
+        {/* Empty state when no vendors found and form is not open */}
+        {!showAddForm && vendors.length === 0 && !loading && (
           <div className="text-center py-12">
             <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m5 0v-5a2 2 0 10-4 0v5m0 0H7" />
