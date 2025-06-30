@@ -137,7 +137,7 @@ frontend:
 
   - task: "Category filtering"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
@@ -152,6 +152,9 @@ frontend:
         -working: true
         -agent: "testing"
         -comment: "Comprehensive testing of category filtering completed. Verified all 51 vendors are displayed initially with 'All Categories' selected. Tested multiple category filters: 'Cleaning Services' (3 vendors), 'Dental' (2 vendors), 'Tennis' (3 vendors), 'Financial Services' (3 vendors), 'Handyman' (3 vendors), and 'Academic Tutoring' (1 vendor). All filters displayed the correct number of vendors and the expected vendor names. Returning to 'All Categories' correctly displayed all 51 vendors again. Verified vendor details match the selected category. Tested edge cases including categories with only 1 vendor and rapid switching between categories. UI remained consistent throughout testing."
+        -working: false
+        -agent: "testing"
+        -comment: "Found a case sensitivity issue in the category filtering. When a vendor is added with category 'executive coaching' (lowercase), it doesn't appear when filtering by 'Executive Coaching' (capitalized), and vice versa. This is because the filtering uses strict equality comparison (===) which is case-sensitive. The issue is in App.js line 452 where it filters vendors: vendors.filter(vendor => vendor.category === selectedCategory). This should be changed to use case-insensitive comparison: vendors.filter(vendor => vendor.category.toLowerCase() === selectedCategory.toLowerCase())."
 
   - task: "Rating filtering"
     implemented: true
