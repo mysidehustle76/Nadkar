@@ -103,7 +103,8 @@ const App = () => {
 
       if (response.ok) {
         const addedVendor = await response.json();
-        setVendors(prev => [...prev, addedVendor]);
+        // Refresh vendors from backend to ensure we have the latest data
+        await fetchVendors();
         setNewVendor({
           name: '',
           category: '',
