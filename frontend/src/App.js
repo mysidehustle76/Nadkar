@@ -400,7 +400,7 @@ const App = () => {
               <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-semibold text-gray-800">{vendor.name}</h3>
+                    <h3 className="text-xl font-semibold text-gray-800">{formatBusinessName(vendor.name)}</h3>
                     <div className="flex items-center space-x-2">
                       <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
                         {vendor.category}
