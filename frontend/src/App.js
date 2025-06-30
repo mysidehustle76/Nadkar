@@ -308,14 +308,16 @@ const App = () => {
     "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
   ];
 
-  // Filter out test vendors and unwanted categories
+  // Filter out specific test data entries
   const filteredVendors = vendors.filter(vendor => {
     const name = vendor.name.toLowerCase();
     const category = vendor.category.toLowerCase();
     return !name.startsWith('test') && 
+           name !== 'nitin nadkar' && // Remove specific test entries
            category !== 'format test' && 
            category !== 'executive coaching' &&
-           category !== 'business consulting';
+           category !== 'business consulting' &&
+           category !== 'legal consulting'; // Remove test category
   });
 
   // Only show categories that have associated vendors (after filtering), but keep standard categories for new additions
