@@ -278,11 +278,11 @@ frontend:
 
   - task: "Dynamic vendor loading from database"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
@@ -290,6 +290,9 @@ frontend:
         -working: "NA"
         -agent: "main"
         -comment: "Implemented dynamic vendor loading with automatic database seeding if no vendors found. Frontend now fetches from backend API with static fallback."
+        -working: true
+        -agent: "testing"
+        -comment: "Verified that the frontend dynamically loads vendors from the database. When the database is empty, the frontend automatically triggers the seed endpoint to populate the database with the 51 vendors. The vendors are then correctly displayed in the UI. This feature works as expected."
 
 metadata:
   created_by: "testing_agent"
