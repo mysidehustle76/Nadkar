@@ -149,6 +149,9 @@ frontend:
         -working: true
         -agent: "testing"
         -comment: "Category filtering works correctly. Tested filtering by 'Restaurants', 'Healthcare', and 'Automotive' categories - each filter displayed only businesses in the selected category."
+        -working: true
+        -agent: "testing"
+        -comment: "Comprehensive testing of category filtering completed. Verified all 51 vendors are displayed initially with 'All Categories' selected. Tested multiple category filters: 'Cleaning Services' (3 vendors), 'Dental' (2 vendors), 'Tennis' (3 vendors), 'Financial Services' (3 vendors), 'Handyman' (3 vendors), and 'Academic Tutoring' (1 vendor). All filters displayed the correct number of vendors and the expected vendor names. Returning to 'All Categories' correctly displayed all 51 vendors again. Verified vendor details match the selected category. Tested edge cases including categories with only 1 vendor and rapid switching between categories. UI remained consistent throughout testing."
 
   - task: "Rating filtering"
     implemented: true
