@@ -290,18 +290,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Main landing page with Yellow Pages design"
-    - "Search functionality"
-    - "Category filtering"
-    - "Rating filtering"
-    - "Phone number clicking functionality"
-    - "Vendor cards with business information"
-    - "Responsive design"
-    - "Empty state when no results found"
-    - "Overall user experience and visual appeal"
-    - "Add a new vendor functionality"
+    - "Update vendor seed endpoint with all 51 vendors"
+    - "MongoDB vendor storage and retrieval"
+    - "API endpoints for vendor management"
+    - "Frontend integration with backend API"
+    - "Dynamic vendor loading from database"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
