@@ -250,6 +250,8 @@ const App = () => {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
+  // Format business name to proper Title Case
+  const formatBusinessName = (name) => {
     if (!name) return name;
     
     return name
