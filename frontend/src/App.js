@@ -66,9 +66,9 @@ const App = () => {
           category: '',
           phone: '',
           rating: 4.5,
-          address: '',
-          description: '',
-          hours: 'Mon-Fri 9AM-5PM'
+          address: 'Bellmoore Park Community',
+          description: 'Community business',
+          hours: 'Contact for hours'
         });
         setShowAddForm(false);
         alert('Vendor added successfully!');
