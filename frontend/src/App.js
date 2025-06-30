@@ -173,7 +173,6 @@ const App = () => {
       {showAdminPanel && (
         <div className="bg-white border-b shadow-md">
           <div className="container mx-auto px-4 py-6">
-            <h2 className="text-xl font-bold mb-4">Add New Vendor</h2>
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
