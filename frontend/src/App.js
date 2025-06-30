@@ -182,7 +182,16 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchVendors();
+    const initializeApp = async () => {
+      await fetchVendors();
+      // If no vendors found, try to seed the database
+      if (vendors.length === 0) {
+        await seedDatabase();
+        await fetchVendors();
+      }
+    };
+    
+    initializeApp();
   }, []);
 
   useEffect(() => {
