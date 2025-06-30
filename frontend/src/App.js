@@ -209,6 +209,39 @@ const App = () => {
     return phone;
   };
 
+  // Format business name to proper Title Case
+  const formatBusinessName = (name) => {
+    if (!name) return name;
+    
+    return name
+      .toLowerCase()
+      .split(' ')
+      .map(word => {
+        if (word.length === 0) return word;
+        
+        // Handle special cases like O'Connor, McDonald, etc.
+        if (word.includes("'")) {
+          return word.split("'").map(part => 
+            part.charAt(0).toUpperCase() + part.slice(1)
+          ).join("'");
+        }
+        
+        // Handle prefixes like Mc, Mac
+        if (word.startsWith('mc') && word.length > 2) {
+          return 'Mc' + word.charAt(2).toUpperCase() + word.slice(3);
+        }
+        
+        if (word.startsWith('mac') && word.length > 3) {
+          return 'Mac' + word.charAt(3).toUpperCase() + word.slice(4);
+        }
+        
+        // Standard title case
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join(' ')
+      .trim();
+  };
+
   const categories = [...new Set(vendors.map(vendor => vendor.category))].sort();
 
 
