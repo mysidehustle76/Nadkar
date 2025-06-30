@@ -480,7 +480,7 @@ const App = () => {
               className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
             >
               <option value="">All Categories</option>
-              {categories.map(category => (
+              {allCategories.map(category => (
                 <option key={category} value={category}>{category}</option>
               ))}
             </select>
