@@ -391,6 +391,7 @@ const App = () => {
       const category = vendor.category.toLowerCase().trim(); // Trim whitespace before comparison
       return !name.startsWith('test') && 
              name !== 'nitin test vendor' && // Remove specific test entry only
+             name !== 'carlos / jc painting' && // Remove duplicate Carlos entry
              category !== 'format test'; // Only block obvious test category
     });
   }, [vendors]);
