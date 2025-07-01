@@ -652,8 +652,7 @@ const App = () => {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-4 mb-20">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-white">© 2025 Designed and created by Nitin Nadkar.</p>
-          <p className="text-sm text-white">Strictly for the use of Bellmoore Park Residents.</p>
+          <p className="text-sm text-white">© 2025 Designed for residents of Bellmoore Park.</p>
         </div>
       </footer>
 
