@@ -240,37 +240,46 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    // Load static vendors immediately for instant display
-    setVendors(staticVendors);
-    setLoading(false);
-    
-    // Then try to update from API in background (optional)
-    const updateFromAPI = async () => {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
-        
-        const response = await fetch(`${BACKEND_URL}/api/vendors`, {
-          signal: controller.signal,
-          headers: { 'Cache-Control': 'max-age=300' }
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (response.ok) {
-          const data = await response.json();
-          if (data && data.length > 0) {
-            setVendors(data);
-          }
-        }
-      } catch (err) {
-        console.log('API update failed, keeping static vendors');
+  // Cleanup test data from database
+  const cleanupTestData = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/vendors/cleanup-test-data`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Cleanup result:', result);
+        // Refresh vendors after cleanup
+        await fetchVendors();
+        return result;
+      } else {
+        console.error('Cleanup failed:', response.statusText);
       }
+    } catch (err) {
+      console.error('Error during cleanup:', err);
+    }
+  };
+
+  // Auto-cleanup test data on app initialization
+  useEffect(() => {
+    const initializeApp = async () => {
+      // First cleanup test data
+      await cleanupTestData();
+      // Then load vendors
+      setVendors(staticVendors);
+      setLoading(false);
+      
+      // Background API update after cleanup
+      setTimeout(async () => {
+        await fetchVendors();
+      }, 1000);
     };
     
-    // Update from API after 1 second delay (non-blocking)
-    setTimeout(updateFromAPI, 1000);
+    initializeApp();
   }, []);
 
   useEffect(() => {
