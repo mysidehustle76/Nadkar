@@ -15,11 +15,20 @@ from bson import ObjectId
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection with Atlas compatibility
-mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-client = AsyncIOMotorClient(mongo_url, maxPoolSize=10, minPoolSize=1)
-# Use environment variable for DB name or default
-db_name = os.environ.get('DB_NAME', 'yellowpages')
+# MongoDB connection with production/development handling
+if os.environ.get('NODE_ENV') == 'production' or os.environ.get('ENVIRONMENT') == 'production':
+    # Production: Use environment provided MONGO_URL (Atlas)
+    mongo_url = os.environ.get('MONGO_URL', 'mongodb+srv://placeholder.mongodb.net/')
+    db_name = os.environ.get('DB_NAME', 'production_db')
+else:
+    # Development: Use local or environment
+    mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    db_name = os.environ.get('DB_NAME', 'yellowpages')
+
+print(f"Connecting to MongoDB: {mongo_url}")
+print(f"Database name: {db_name}")
+
+client = AsyncIOMotorClient(mongo_url, maxPoolSize=10, minPoolSize=1, serverSelectionTimeoutMS=5000)
 db = client[db_name]
 
 # Create the main app without a prefix
