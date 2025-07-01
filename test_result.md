@@ -105,6 +105,66 @@
 user_problem_statement: "Enhance Yellow Pages app: Test Add New Vendor functionality with two scenarios - Option 1: Add vendor with NEW category (sentence case formatting, dynamic categories, numbers-only phone validation, 3-3-4 format display, immediate visibility). Option 2: Add vendor with EXISTING category (Title Case formatting, existing category mapping, same phone requirements, immediate visibility). Remove Github messages, show only 'New Vendor Added'."
 
 frontend:
+  - task: "Add New Vendor with NEW category (sentence case formatting)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Enhanced Add New Vendor functionality to detect if category is new and apply sentence case formatting (only first word capitalized) for name, category, and description. Added formatToSentenceCase function and logic to check existing categories."
+
+  - task: "Add New Vendor with EXISTING category (Title Case formatting)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Enhanced Add New Vendor functionality to detect if category already exists and apply Title Case formatting (each word capitalized) for name and category. Maintains InitCap formatting regardless of user input."
+
+  - task: "Phone number validation and 3-3-4 format display"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Enhanced phone input to only allow numeric characters (prevents text entry), added maxLength=10, and confirmed formatPhoneNumber function displays in 3-3-4 digit format (XXX-XXX-XXXX)."
+
+  - task: "Dynamic category creation and mapping"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Added logic to detect if user enters a new category (not in existing vendor list) vs existing category, and format accordingly. New categories use sentence case, existing categories use Title Case."
+
+  - task: "Immediate vendor visibility after adding"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Confirmed that addVendor function adds new vendor to local state immediately (setVendors(prev => [...prev, result])) for instant visibility in vendor list and tiles."
+
   - task: "Delete vendor functionality with confirmation dialog"
     implemented: true
     working: true
