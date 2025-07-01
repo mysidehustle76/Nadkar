@@ -100,22 +100,41 @@ const App = () => {
     }
   };
 
-  // Add new vendor with immediate feedback
+  // Add new vendor with proper validation and formatting
   const addVendor = async (e) => {
     e.preventDefault();
-    console.log('Add vendor called', newVendor);
     
     // Prevent double submission
     if (isSubmitting) return;
-    
     setIsSubmitting(true);
     
-    // Simple validation - just check required fields
+    // Validate required fields
     if (!newVendor.name || !newVendor.category || !newVendor.phone || !newVendor.description) {
-      console.log('Validation failed - missing required fields');
+      // Create custom validation message
+      setShowValidationError(true);
+      setValidationMessage('Please fill in all required fields');
       setIsSubmitting(false);
       return;
     }
+    
+    // Validate phone number (numbers only)
+    if (!validatePhoneNumber(newVendor.phone)) {
+      setShowValidationError(true);
+      setValidationMessage('Phone number must contain only numbers (10 digits)');
+      setIsSubmitting(false);
+      return;
+    }
+    
+    // Format all fields properly
+    const formattedVendor = {
+      name: formatBusinessName(newVendor.name),
+      category: formatCategoryName(newVendor.category),
+      phone: formatPhoneNumber(newVendor.phone),
+      description: newVendor.description,
+      rating: newVendor.rating,
+      address: newVendor.address,
+      hours: newVendor.hours
+    };
     
     try {
       const response = await fetch(`${BACKEND_URL}/api/vendors`, {
@@ -123,14 +142,14 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newVendor),
+        body: JSON.stringify(formattedVendor),
       });
-
-      console.log('API response status:', response.status);
 
       if (response.ok) {
         const result = await response.json();
-        console.log('Vendor added successfully:', result);
+        
+        // Add to local state immediately for instant display
+        setVendors(prev => [...prev, result]);
         
         // Reset form
         setNewVendor({
@@ -144,14 +163,24 @@ const App = () => {
         });
         setShowAddForm(false);
         
-        // Add to local state immediately
-        setVendors(prev => [...prev, result]);
+        // Show success message
+        setShowSuccessMessage(true);
+        setSuccessMessage('New Vendor Added');
+        
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+        }, 3000);
+        
       } else {
         const errorData = await response.json();
-        console.error('API Error:', errorData);
+        setShowValidationError(true);
+        setValidationMessage(`Error: ${errorData.detail}`);
       }
     } catch (err) {
       console.error('Network Error:', err);
+      setShowValidationError(true);
+      setValidationMessage('Network error. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
