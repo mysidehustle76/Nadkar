@@ -314,6 +314,7 @@ const App = () => {
     const category = vendor.category.toLowerCase();
     return !name.startsWith('test') && 
            name !== 'nitin nadkar' && // Remove specific test entries
+           name !== 'nitin test vendor' && // Remove additional test entry
            category !== 'format test' && 
            category !== 'executive coaching' &&
            category !== 'business consulting' &&
