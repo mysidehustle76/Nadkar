@@ -122,6 +122,9 @@ frontend:
         -working: true
         -agent: "testing"
         -comment: "Retested the Add New Vendor functionality with NEW category using non-blocked words. Successfully added a vendor with name 'john DOE services', description 'professional cleaning and maintenance services', category 'CUSTOM home SERVICES', and phone '5551234567'. The vendor appears in the list with proper sentence case formatting: name 'John Doe Services', category 'Custom home services', and description 'Professional cleaning and maintenance services'. The phone number is correctly formatted as '555-123-4567'. The new category also appears in the category dropdown. The only issue is that the success message 'New Vendor Added' doesn't appear, but the form closes after submission indicating successful addition."
+        -working: true
+        -agent: "testing"
+        -comment: "Tested the success message display for the Add New Vendor functionality with NEW category. Successfully added a vendor with name 'john DOE services', description 'professional cleaning and maintenance services', category 'CUSTOM home SERVICES', and phone '5551234567'. The success message now appears correctly with the text '✅ New Vendor Added' on a GREEN background. The message is visible for approximately 4.7 seconds and then disappears as expected. The form closes successfully after submission, and the new vendor appears in the list with proper sentence case formatting."
 
   - task: "Add New Vendor with EXISTING category (Title Case formatting)"
     implemented: true
