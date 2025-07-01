@@ -107,63 +107,78 @@ user_problem_statement: "Enhance Yellow Pages app: Test Add New Vendor functiona
 frontend:
   - task: "Add New Vendor with NEW category (sentence case formatting)"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: true
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "Enhanced Add New Vendor functionality to detect if category is new and apply sentence case formatting (only first word capitalized) for name, category, and description. Added formatToSentenceCase function and logic to check existing categories."
+        -working: false
+        -agent: "testing"
+        -comment: "The Add New Vendor functionality with NEW category is not working correctly. When adding a vendor with a new category, the form submission is successful (200 response), but the vendor doesn't appear in the list. Testing with various new category names showed the same result. The issue might be related to filtering logic in the frontend that filters out vendors with 'test' or 'testing' in their name, category, or description. However, even when using names and descriptions without these terms, new vendors with new categories still don't appear in the list."
 
   - task: "Add New Vendor with EXISTING category (Title Case formatting)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "Enhanced Add New Vendor functionality to detect if category already exists and apply Title Case formatting (each word capitalized) for name and category. Maintains InitCap formatting regardless of user input."
+        -working: true
+        -agent: "testing"
+        -comment: "The Add New Vendor functionality with EXISTING category works correctly. When adding a vendor with an existing category (e.g., 'dental'), the vendor appears in the list with proper Title Case formatting for the name ('Yellow Pages Vendor Two') and category ('Dental'). The description is displayed as entered, and the phone number is correctly formatted in 3-3-4 format (444-555-6666). The vendor is immediately visible in the list after submission."
 
   - task: "Phone number validation and 3-3-4 format display"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "Enhanced phone input to only allow numeric characters (prevents text entry), added maxLength=10, and confirmed formatPhoneNumber function displays in 3-3-4 digit format (XXX-XXX-XXXX)."
+        -working: true
+        -agent: "testing"
+        -comment: "Phone number validation works correctly. When attempting to enter letters in the phone field, they are blocked and don't appear in the input. The phone number is limited to 10 digits and is displayed in the correct 3-3-4 format (XXX-XXX-XXXX) on the vendor cards."
 
   - task: "Dynamic category creation and mapping"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: true
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "Added logic to detect if user enters a new category (not in existing vendor list) vs existing category, and format accordingly. New categories use sentence case, existing categories use Title Case."
+        -working: false
+        -agent: "testing"
+        -comment: "Dynamic category creation is not working correctly. When adding a vendor with a new category, the category doesn't appear in the dropdown after submission. This is likely related to the issue with new vendors not appearing in the list. The category detection logic seems to be working (as evidenced by the successful Title Case formatting for existing categories), but new categories aren't being added to the dropdown."
 
   - task: "Immediate vendor visibility after adding"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "Confirmed that addVendor function adds new vendor to local state immediately (setVendors(prev => [...prev, result])) for instant visibility in vendor list and tiles."
+        -working: true
+        -agent: "testing"
+        -comment: "Immediate vendor visibility works correctly for vendors with existing categories. After submitting the form, the new vendor appears in the list without needing to refresh the page. However, this doesn't work for vendors with new categories, as they don't appear in the list at all."
 
   - task: "Delete vendor functionality with confirmation dialog"
     implemented: true
