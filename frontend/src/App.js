@@ -442,19 +442,23 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Community Banner - Optimized Base64 Image */}
+      {/* Community Banner - Blurred with increased height */}
       <section className="relative">
         <div 
-          className="w-full h-24 bg-cover bg-center bg-no-repeat flex items-center justify-center"
+          className="w-full h-32 bg-cover bg-center bg-no-repeat flex items-center justify-center relative"
           style={{ 
-            height: '100px',
-            backgroundImage: `url('https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=800&height=200&fit=bounds&ois=2c7ddaf')`,
-            backgroundColor: '#fef3c7' // Fallback color while loading
+            height: '125px',
+            backgroundImage: `url('https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=800&height=250&fit=bounds&ois=2c7ddaf')`,
+            backgroundColor: '#fef3c7', // Fallback color while loading
+            filter: 'blur(2px)' // Add blur effect
           }}
         >
-          <div className="text-center bg-black bg-opacity-30 px-6 py-3 rounded-lg">
-            <h1 className="text-2xl font-bold text-white mb-1 drop-shadow-lg">Bellmoore Park Yellow Pages</h1>
-            <p className="text-sm text-white italic drop-shadow-lg">Service Providers that your neighbors trust!</p>
+          {/* Overlay for text without background */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-white mb-1 drop-shadow-2xl">Bellmoore Park Yellow Pages</h1>
+              <p className="text-sm text-white italic drop-shadow-2xl">Service Providers that your neighbors trust!</p>
+            </div>
           </div>
         </div>
       </section>
