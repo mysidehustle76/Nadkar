@@ -211,25 +211,39 @@ const App = () => {
   };
 
   // Delete vendor
-  const deleteVendor = async (vendorId) => {
-    if (!window.confirm('Are you sure you want to delete this vendor?')) {
+  const deleteVendor = async (vendor) => {
+    // Confirmation dialog with vendor details
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete this vendor?\n\n` +
+      `Name: ${vendor.name}\n` +
+      `Category: ${vendor.category}\n` +
+      `Phone: ${vendor.phone}\n\n` +
+      `This action cannot be undone.`
+    );
+
+    if (!confirmDelete) {
       return;
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/vendors/${vendorId}`, {
+      const response = await fetch(`${BACKEND_URL}/api/vendors/${vendor.id}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.ok) {
-        setVendors(prev => prev.filter(vendor => vendor.id !== vendorId));
-        alert('Vendor deleted successfully!');
+        // Remove vendor from local state immediately
+        setVendors(prev => prev.filter(v => v.id !== vendor.id));
+        alert(`✅ ${vendor.name} has been deleted successfully!`);
       } else {
-        alert('Error deleting vendor');
+        const errorData = await response.json();
+        alert(`❌ Error deleting vendor: ${errorData.detail}`);
       }
     } catch (err) {
       console.error('Error deleting vendor:', err);
-      alert('Error deleting vendor. Please try again.');
+      alert('❌ Error deleting vendor. Please try again.');
     }
   };
 
