@@ -103,40 +103,19 @@ const App = () => {
   // Add new vendor with immediate feedback
   const addVendor = async (e) => {
     e.preventDefault();
+    console.log('Add vendor called', newVendor);
     
     // Prevent double submission
     if (isSubmitting) return;
     
-    setIsSubmitting(true); // Disable button immediately
+    setIsSubmitting(true);
     
-    // Validate required fields
+    // Simple validation - just check required fields
     if (!newVendor.name || !newVendor.category || !newVendor.phone || !newVendor.description) {
-      console.log('Please fill in all required fields');
+      console.log('Validation failed - missing required fields');
       setIsSubmitting(false);
       return;
     }
-    
-    // Format phone number for comparison
-    const formattedPhone = formatPhoneNumber(newVendor.phone);
-    
-    // Check for duplicate phone number (hard validation)
-    const duplicatePhone = filteredVendors.find(vendor => 
-      formatPhoneNumber(vendor.phone) === formattedPhone
-    );
-    
-    if (duplicatePhone) {
-      console.log(`This phone number (${formattedPhone}) already exists for "${duplicatePhone.name}".`);
-      setIsSubmitting(false);
-      return;
-    }
-    
-    // Format phone number and business name before saving
-    const formattedVendor = {
-      ...newVendor,
-      name: formatBusinessName(newVendor.name),
-      category: formatCategoryName(newVendor.category),
-      phone: formattedPhone
-    };
     
     try {
       const response = await fetch(`${BACKEND_URL}/api/vendors`, {
@@ -144,11 +123,16 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formattedVendor),
+        body: JSON.stringify(newVendor),
       });
 
+      console.log('API response status:', response.status);
+
       if (response.ok) {
-        // Reset form immediately
+        const result = await response.json();
+        console.log('Vendor added successfully:', result);
+        
+        // Reset form
         setNewVendor({
           name: '',
           category: '',
@@ -160,33 +144,16 @@ const App = () => {
         });
         setShowAddForm(false);
         
-        // Refresh vendors in background
-        await fetchVendors();
+        // Add to local state immediately
+        setVendors(prev => [...prev, result]);
       } else {
         const errorData = await response.json();
-        console.error(`Error: ${errorData.detail}`);
+        console.error('API Error:', errorData);
       }
     } catch (err) {
-      console.error('Error adding vendor:', err);
-      
-      // Fallback: Add directly to local state if API fails
-      const newVendorWithId = {
-        ...formattedVendor,
-        id: Date.now().toString() // Simple ID generation
-      };
-      setVendors(prev => [...prev, newVendorWithId]);
-      setNewVendor({
-        name: '',
-        category: '',
-        phone: '',
-        rating: 4.5,
-        address: 'Bellmoore Park Community',
-        description: '',
-        hours: 'Contact for hours'
-      });
-      setShowAddForm(false);
+      console.error('Network Error:', err);
     } finally {
-      setIsSubmitting(false); // Re-enable button
+      setIsSubmitting(false);
     }
   };
 
