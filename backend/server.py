@@ -161,28 +161,19 @@ async def update_vendor(vendor_id: str, vendor_update: VendorUpdate):
 
 @api_router.delete("/vendors/{vendor_id}")
 async def delete_vendor(vendor_id: str):
-    """Delete a vendor with fallback support"""
-    global USE_FALLBACK_DATA
-    
+    """Delete a vendor"""
     try:
-        # If in fallback mode, simulate success
-        if USE_FALLBACK_DATA or vendor_id.startswith("fallback-"):
-            return {"message": "Vendor deleted successfully (DEMO MODE)"}
-        
-        # Try database operation
         result = await db.vendors.delete_one({"id": vendor_id})
         
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Vendor not found")
         
         return {"message": "Vendor deleted successfully"}
-        
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error deleting vendor, using fallback: {str(e)}")
-        USE_FALLBACK_DATA = True
-        return {"message": "Vendor deleted successfully (DEMO MODE)"}
+        logger.error(f"Error deleting vendor: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting vendor: {str(e)}")
 
 @api_router.post("/vendors/seed")
 async def seed_vendors():
