@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Integrate backend data persistence for the Yellow Pages app. Migrate the 51 static vendors to MongoDB database, update frontend to fetch from backend API, and ensure full CRUD operations work with persistent storage. This will make the application truly dynamic and set the foundation for future enhancements."
+user_problem_statement: "Enhance Yellow Pages app: Test the delete functionality including warning message box, user confirmation with 'Yes', successful vendor deletion, and remove any generic Github import messages."
 
 frontend:
   - task: "Main landing page with Yellow Pages design"
