@@ -440,7 +440,25 @@ const App = () => {
 
   // Memoize filtered vendors for performance  
   const filteredVendors = useMemo(() => {
-    return vendors; // No filtering - show all vendors
+    return vendors.filter(vendor => {
+      // Words to filter out from names, categories, descriptions, and phone numbers
+      const blockedWords = ['demo', 'test', 'testing', 'example'];
+      
+      const name = vendor.name.toLowerCase().trim();
+      const category = vendor.category.toLowerCase().trim();
+      const description = vendor.description.toLowerCase().trim();
+      const phone = vendor.phone.toLowerCase().trim();
+      
+      // Check if any blocked word appears in any field
+      const hasBlockedWord = blockedWords.some(word => 
+        name.includes(word) || 
+        category.includes(word) || 
+        description.includes(word) || 
+        phone.includes(word)
+      );
+      
+      return !hasBlockedWord;
+    });
   }, [vendors]);
 
   // Memoize categories for performance
