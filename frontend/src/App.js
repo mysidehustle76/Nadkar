@@ -24,12 +24,16 @@ const App = () => {
 
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 
-  // Fetch vendors from backend
+  // Fetch vendors from backend with performance optimization
   const fetchVendors = async () => {
     try {
       setLoading(true);
       
-      const response = await fetch(`${BACKEND_URL}/api/vendors`);
+      const response = await fetch(`${BACKEND_URL}/api/vendors`, {
+        headers: {
+          'Cache-Control': 'max-age=300', // Cache for 5 minutes
+        }
+      });
       if (response.ok) {
         const data = await response.json();
         setVendors(data);
