@@ -87,13 +87,19 @@ const App = () => {
     }
   };
 
-  // Add new vendor
+  // Add new vendor with immediate feedback
   const addVendor = async (e) => {
     e.preventDefault();
+    
+    // Prevent double submission
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true); // Disable button immediately
     
     // Validate required fields
     if (!newVendor.name || !newVendor.category || !newVendor.phone || !newVendor.description) {
       alert('Please fill in all required fields');
+      setIsSubmitting(false);
       return;
     }
     
@@ -107,6 +113,7 @@ const App = () => {
     
     if (duplicatePhone) {
       alert(`This phone number (${formattedPhone}) already exists for "${duplicatePhone.name}". Please check if this is a duplicate entry.`);
+      setIsSubmitting(false);
       return;
     }
     
@@ -122,6 +129,7 @@ const App = () => {
         `Do you want to proceed anyway?`
       );
       if (!proceed) {
+        setIsSubmitting(false);
         return;
       }
     }
