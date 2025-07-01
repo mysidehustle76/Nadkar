@@ -421,6 +421,13 @@ const App = () => {
       .trim();
   };
 
+  // Format to Sentence Case (only first word capitalized) for new categories
+  const formatToSentenceCase = (text) => {
+    if (!text) return text;
+    const trimmed = text.trim().toLowerCase();
+    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+  };
+
   // Get all unique categories from vendors + standard categories
   const standardCategories = [
     "Academic Tutoring", "Accounting & Tax", "Air Conditioning & Heating", "Appliance Repair",
