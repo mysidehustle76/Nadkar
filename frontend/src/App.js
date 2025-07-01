@@ -373,7 +373,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Community Banner - Increased height by 25% */}
+      {/* Community Banner - Reduced font sizes */}
       <section className="relative">
         <div 
           className="w-full h-24 bg-gradient-to-r from-yellow-100 to-yellow-200 flex items-center justify-center"
@@ -383,8 +383,8 @@ const App = () => {
           }}
         >
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-800 mb-1">Bellmoore Park Yellow Pages</h1>
-            <p className="text-base text-gray-600 italic">Service Providers that your neighbors trust!</p>
+            <h1 className="text-2xl font-bold text-gray-800 mb-1">Bellmoore Park Yellow Pages</h1>
+            <p className="text-sm text-gray-600 italic">Service Providers that your neighbors trust!</p>
           </div>
         </div>
       </section>
