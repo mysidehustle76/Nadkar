@@ -344,12 +344,10 @@ metadata:
 
 test_plan:
   current_focus: 
-    - "Delete vendor functionality with confirmation dialog"
     - "Warning message box display"
     - "Remove Github import messages"
   stuck_tasks: 
     - "Fix for Nitin Nadkar vendors not showing consistently"
-    - "Delete vendor functionality with confirmation dialog"
   test_all: false
   test_priority: "high_first"
 
