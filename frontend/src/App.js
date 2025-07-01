@@ -559,30 +559,13 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Group vendors by category and sort them - optimized */}
             {sortedVendors.map(vendor => (
-              <div key={vendor.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-semibold text-gray-800">{formatBusinessName(vendor.name)}</h3>
-                    <div className="flex items-center space-x-2">
-                      <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
-                        {vendor.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-4">{vendor.description}</p>
-
-                  <button
-                    onClick={() => handlePhoneClick(vendor.phone)}
-                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span>{formatPhoneNumber(vendor.phone)}</span>
-                  </button>
-                </div>
-              </div>
+              <VendorCard
+                key={vendor.id}
+                vendor={vendor}
+                onPhoneClick={handlePhoneClick}
+                formatBusinessName={formatBusinessName}
+                formatPhoneNumber={formatPhoneNumber}
+              />
             ))}
           </div>
         )}
