@@ -55,6 +55,7 @@ const App = () => {
   const [showValidationError, setShowValidationError] = useState(false);
   const [validationMessage, setValidationMessage] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Form state for adding new vendor
   const [newVendor, setNewVendor] = useState({
