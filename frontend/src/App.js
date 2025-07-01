@@ -267,6 +267,60 @@ const App = () => {
     }
   };
 
+  // GitHub Import Functions
+  const compareWithGitHub = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/github/compare`);
+      if (response.ok) {
+        const comparison = await response.json();
+        setGitHubComparison(comparison);
+        setShowGitHubImport(true);
+      } else {
+        alert('Error comparing with GitHub repository');
+      }
+    } catch (err) {
+      console.error('Error comparing with GitHub:', err);
+      alert('Error connecting to GitHub. Please try again.');
+    }
+  };
+
+  const importFromGitHub = async (filesToImport = null) => {
+    try {
+      const importRequest = {
+        repository_url: "https://github.com/mysidehustle76/Nadkar",
+        branch: "main",
+        files_to_import: filesToImport
+      };
+
+      const response = await fetch(`${BACKEND_URL}/api/github/import`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(importRequest),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setImportStatus(result);
+        alert(`Successfully imported ${result.total_imported} files from GitHub!`);
+        
+        // Refresh the page to load new code
+        if (result.total_imported > 0) {
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      } else {
+        const error = await response.json();
+        alert(`Import failed: ${error.detail}`);
+      }
+    } catch (err) {
+      console.error('Error importing from GitHub:', err);
+      alert('Error importing from GitHub. Please try again.');
+    }
+  };
+
   useEffect(() => {
     // Load static vendors immediately for instant display (restore fast loading)
     setVendors(staticVendors);
