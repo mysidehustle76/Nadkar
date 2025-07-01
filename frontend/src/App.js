@@ -649,8 +649,47 @@ const App = () => {
           </div>
         )}
 
-        {/* Empty state when no vendors found and form is not open */}
-        {!showAddForm && filteredVendors.length === 0 && !loading && (
+      {/* Custom Delete Confirmation Dialog */}
+      {showDeleteConfirm && vendorToDelete && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div className="flex items-center mb-4">
+              <svg className="w-6 h-6 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.732 15.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+              <h3 className="text-lg font-semibold text-gray-900">Confirm Delete</h3>
+            </div>
+            
+            <p className="text-gray-600 mb-4">Are you sure you want to delete this vendor?</p>
+            
+            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+              <p className="text-sm"><strong>Name:</strong> {vendorToDelete.name}</p>
+              <p className="text-sm"><strong>Category:</strong> {vendorToDelete.category}</p>
+              <p className="text-sm"><strong>Phone:</strong> {vendorToDelete.phone}</p>
+            </div>
+            
+            <p className="text-sm text-red-600 mb-6">This action cannot be undone.</p>
+            
+            <div className="flex space-x-3 justify-end">
+              <button
+                onClick={cancelDeleteVendor}
+                className="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDeleteVendor}
+                className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Empty state when no vendors found and form is not open */}
+      {!showAddForm && filteredVendors.length === 0 && !loading && (
           <div className="text-center py-12">
             <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m5 0v-5a2 2 0 10-4 0v5m0 0H7" />
