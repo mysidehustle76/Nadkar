@@ -400,10 +400,10 @@ const App = () => {
       .trim();
   };
 
-  // Validate phone number (numbers only)
+  // Validate phone number (numbers only, 10 digits)
   const validatePhoneNumber = (phone) => {
     const cleaned = phone.replace(/\D/g, '');
-    return cleaned.length === 10 || (cleaned.length === 11 && cleaned.startsWith('1'));
+    return cleaned.length === 10;
   };
 
   // Get all unique categories from vendors + standard categories
