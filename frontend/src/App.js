@@ -637,6 +637,7 @@ const App = () => {
                 key={vendor.id}
                 vendor={vendor}
                 onPhoneClick={handlePhoneClick}
+                onDeleteClick={deleteVendor}
                 formatBusinessName={formatBusinessName}
                 formatPhoneNumber={formatPhoneNumber}
               />
