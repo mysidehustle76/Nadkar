@@ -24,26 +24,34 @@ const App = () => {
 
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 
-  // Fetch vendors from backend with performance optimization
+  // Fetch vendors from backend with better error handling
   const fetchVendors = async () => {
     try {
       setLoading(true);
       
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      
       const response = await fetch(`${BACKEND_URL}/api/vendors`, {
+        signal: controller.signal,
         headers: {
           'Cache-Control': 'max-age=300', // Cache for 5 minutes
         }
       });
+      
+      clearTimeout(timeoutId);
+      
       if (response.ok) {
         const data = await response.json();
         setVendors(data);
       } else {
         // Fallback to static vendors if API fails
+        console.log('API failed, using static vendors');
         setVendors(staticVendors);
       }
     } catch (err) {
       console.error('Error fetching vendors:', err);
-      // Fallback to static vendors if API fails
+      // Always fallback to static vendors for reliability
       setVendors(staticVendors);
     } finally {
       setLoading(false);
