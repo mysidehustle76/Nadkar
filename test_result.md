@@ -323,7 +323,7 @@ metadata:
 
 test_plan:
   current_focus: 
-    - "Performance optimizations"
+    - "Fix for Nitin Nadkar vendors not showing consistently"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
