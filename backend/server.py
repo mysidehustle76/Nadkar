@@ -97,82 +97,19 @@ async def get_status_checks():
 
 @api_router.get("/vendors", response_model=List[Vendor])
 async def get_vendors():
-    """Get all vendors with fallback support"""
-    global USE_FALLBACK_DATA
-    
+    """Get all vendors"""
     try:
-        # Try database first
-        if not USE_FALLBACK_DATA:
-            vendors_cursor = db.vendors.find({})
-            vendors = []
-            async for vendor in vendors_cursor:
-                vendor['id'] = vendor.pop('_id')
-                if isinstance(vendor['id'], ObjectId):
-                    vendor['id'] = str(vendor['id'])
-                vendors.append(vendor)
-            
-            if vendors:  # If we got data from DB, return it
-                return vendors
-            else:  # If empty, fall back to mock data
-                USE_FALLBACK_DATA = True
-        
-        # Fallback mock data when database is unavailable
-        fallback_vendors = [
-            {
-                "id": "fallback-1",
-                "name": "Demo Plumbing Services",
-                "category": "Plumbing",
-                "phone": "555-123-4567",
-                "rating": 4.5,
-                "address": "Bellmoore Park Community",
-                "description": "Professional plumbing services",
-                "hours": "Mon-Fri 9AM-5PM",
-                "created_at": "2025-07-01T12:00:00"
-            },
-            {
-                "id": "fallback-2", 
-                "name": "Demo Electrical Works",
-                "category": "Electrical",
-                "phone": "555-987-6543",
-                "rating": 4.8,
-                "address": "Bellmoore Park Community", 
-                "description": "Licensed electrical contractors",
-                "hours": "Mon-Sat 8AM-6PM",
-                "created_at": "2025-07-01T12:00:00"
-            },
-            {
-                "id": "fallback-3",
-                "name": "Demo Landscaping Co",
-                "category": "Landscaping", 
-                "phone": "555-456-7890",
-                "rating": 4.7,
-                "address": "Bellmoore Park Community",
-                "description": "Beautiful landscape design and maintenance",
-                "hours": "Mon-Fri 7AM-4PM",
-                "created_at": "2025-07-01T12:00:00"
-            }
-        ]
-        
-        return [Vendor(**vendor) for vendor in fallback_vendors]
-        
+        vendors_cursor = db.vendors.find({})
+        vendors = []
+        async for vendor in vendors_cursor:
+            vendor['id'] = vendor.pop('_id')
+            if isinstance(vendor['id'], ObjectId):
+                vendor['id'] = str(vendor['id'])
+            vendors.append(vendor)
+        return vendors
     except Exception as e:
-        logger.error(f"Database error, using fallback data: {str(e)}")
-        USE_FALLBACK_DATA = True
-        
-        # Return mock data for testing
-        return [Vendor(**vendor) for vendor in [
-            {
-                "id": "fallback-1",
-                "name": "Demo Plumbing Services", 
-                "category": "Plumbing",
-                "phone": "555-123-4567",
-                "rating": 4.5,
-                "address": "Bellmoore Park Community",
-                "description": "Professional plumbing services - DEMO MODE",
-                "hours": "Mon-Fri 9AM-5PM",
-                "created_at": "2025-07-01T12:00:00"
-            }
-        ]]
+        logger.error(f"Error fetching vendors: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching vendors: {str(e)}")
 
 @api_router.post("/vendors", response_model=Vendor)
 async def create_vendor(vendor: VendorCreate):
