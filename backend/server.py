@@ -93,8 +93,7 @@ async def get_status_checks():
     return [StatusCheck(**status_check) for status_check in status_checks]
 
 # Vendor Management Endpoints
-# Add fallback mode for when database is unavailable
-USE_FALLBACK_DATA = False
+
 
 @api_router.get("/vendors", response_model=List[Vendor])
 async def get_vendors():
