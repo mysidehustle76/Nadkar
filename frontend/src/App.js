@@ -264,22 +264,41 @@ const App = () => {
     }
   };
 
-  // Auto-cleanup test data on app initialization
   useEffect(() => {
-    const initializeApp = async () => {
-      // First cleanup test data
-      await cleanupTestData();
-      // Then load vendors
-      setVendors(staticVendors);
-      setLoading(false);
-      
-      // Background API update after cleanup
-      setTimeout(async () => {
-        await fetchVendors();
-      }, 1000);
+    // Load static vendors immediately for instant display (restore fast loading)
+    setVendors(staticVendors);
+    setLoading(false);
+    
+    // Run cleanup and API update in background (non-blocking)
+    const backgroundTasks = async () => {
+      try {
+        // Cleanup test data in background
+        await cleanupTestData();
+        
+        // Then update from API
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        const response = await fetch(`${BACKEND_URL}/api/vendors`, {
+          signal: controller.signal,
+          headers: { 'Cache-Control': 'max-age=300' }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setVendors(data);
+          }
+        }
+      } catch (err) {
+        console.log('Background tasks failed, keeping static vendors');
+      }
     };
     
-    initializeApp();
+    // Run background tasks after 1 second delay (non-blocking)
+    setTimeout(backgroundTasks, 1000);
   }, []);
 
   useEffect(() => {
