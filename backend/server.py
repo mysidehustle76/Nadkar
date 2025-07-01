@@ -751,6 +751,11 @@ async def shutdown_db_client():
     client.close()
 
 # GitHub Import/Sync Functionality
+@api_router.get("/github-test")
+async def github_test():
+    """Test endpoint for GitHub functionality"""
+    return {"message": "GitHub test endpoint is working"}
+
 @api_router.get("/github/compare")
 async def compare_with_github():
     """Compare local files with GitHub repository"""
