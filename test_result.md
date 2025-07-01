@@ -107,11 +107,11 @@ user_problem_statement: "Enhance Yellow Pages app: Test Add New Vendor functiona
 frontend:
   - task: "Add New Vendor with NEW category (sentence case formatting)"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/App.js"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
@@ -119,6 +119,9 @@ frontend:
         -working: false
         -agent: "testing"
         -comment: "The Add New Vendor functionality with NEW category is not working correctly. When adding a vendor with a new category, the form submission is successful (200 response), but the vendor doesn't appear in the list. Testing with various new category names showed the same result. The issue might be related to filtering logic in the frontend that filters out vendors with 'test' or 'testing' in their name, category, or description. However, even when using names and descriptions without these terms, new vendors with new categories still don't appear in the list."
+        -working: true
+        -agent: "testing"
+        -comment: "Retested the Add New Vendor functionality with NEW category using non-blocked words. Successfully added a vendor with name 'john DOE services', description 'professional cleaning and maintenance services', category 'CUSTOM home SERVICES', and phone '5551234567'. The vendor appears in the list with proper sentence case formatting: name 'John Doe Services', category 'Custom home services', and description 'Professional cleaning and maintenance services'. The phone number is correctly formatted as '555-123-4567'. The new category also appears in the category dropdown. The only issue is that the success message 'New Vendor Added' doesn't appear, but the form closes after submission indicating successful addition."
 
   - task: "Add New Vendor with EXISTING category (Title Case formatting)"
     implemented: true
