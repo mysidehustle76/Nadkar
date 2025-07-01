@@ -302,12 +302,12 @@ const App = () => {
     window.location.href = `tel:${phone}`;
   };
 
-  // Format phone number to XXX-XXX-XXXX format
+  // Format phone number to XXX-XXX-XXXX format (3-3-4 digits)
   const formatPhoneNumber = (phone) => {
     // Remove all non-digit characters
     const cleaned = phone.replace(/\D/g, '');
     
-    // Check if we have 10 digits
+    // Check if we have exactly 10 digits
     if (cleaned.length === 10) {
       return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
     }
@@ -331,7 +331,8 @@ const App = () => {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
-  // Format business name to proper Title Case
+
+  // Format business name to proper Title Case (Sentence Case)
   const formatBusinessName = (name) => {
     if (!name) return name;
     
@@ -362,6 +363,12 @@ const App = () => {
       })
       .join(' ')
       .trim();
+  };
+
+  // Validate phone number (numbers only)
+  const validatePhoneNumber = (phone) => {
+    const cleaned = phone.replace(/\D/g, '');
+    return cleaned.length === 10 || (cleaned.length === 11 && cleaned.startsWith('1'));
   };
 
   // Get all unique categories from vendors + standard categories
