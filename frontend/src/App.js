@@ -34,6 +34,9 @@ const App = () => {
   const [vendors, setVendors] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [showGitHubImport, setShowGitHubImport] = useState(false);
+  const [gitHubComparison, setGitHubComparison] = useState(null);
+  const [importStatus, setImportStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
