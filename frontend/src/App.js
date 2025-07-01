@@ -68,8 +68,6 @@ const App = () => {
     hours: 'Contact for hours'
   });
 
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
-
   // Fetch vendors from backend with better error handling
   const fetchVendors = async () => {
     try {
