@@ -2,6 +2,14 @@ import React, { useState, useEffect, useMemo, memo } from 'react';
 import './App.css';
 import { staticVendors } from './vendors';
 
+// Backend URL configuration for different environments
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 
+  (process.env.NODE_ENV === 'production' 
+    ? 'https://bmp-directory.emergent.host' 
+    : 'http://localhost:8000');
+
+console.log('Backend URL:', BACKEND_URL);
+
 // Memoized vendor card component for performance
 const VendorCard = memo(({ vendor, onPhoneClick, onDeleteClick, formatBusinessName, formatPhoneNumber }) => (
   <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden relative">
