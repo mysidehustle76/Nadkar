@@ -197,8 +197,36 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Simplified initialization - avoid multiple API calls
-    fetchVendors();
+    // Load static vendors immediately for instant display
+    setVendors(staticVendors);
+    setLoading(false);
+    
+    // Then try to update from API in background (optional)
+    const updateFromAPI = async () => {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+        
+        const response = await fetch(`${BACKEND_URL}/api/vendors`, {
+          signal: controller.signal,
+          headers: { 'Cache-Control': 'max-age=300' }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setVendors(data);
+          }
+        }
+      } catch (err) {
+        console.log('API update failed, keeping static vendors');
+      }
+    };
+    
+    // Update from API after 1 second delay (non-blocking)
+    setTimeout(updateFromAPI, 1000);
   }, []);
 
   useEffect(() => {
