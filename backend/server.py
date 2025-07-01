@@ -68,6 +68,11 @@ class VendorUpdate(BaseModel):
     description: Optional[str] = None
     hours: Optional[str] = None
 
+class GitHubImportRequest(BaseModel):
+    repository_url: str
+    branch: str = "main"
+    files_to_import: Optional[List[str]] = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
