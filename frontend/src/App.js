@@ -392,7 +392,8 @@ const App = () => {
       return !name.startsWith('test') && 
              name !== 'nitin test vendor' && // Remove specific test entry only
              name !== 'carlos / jc painting' && // Remove only this specific duplicate entry
-             category !== 'format test'; // Only block obvious test category
+             category !== 'format test' && // Only block obvious test category
+             category !== 'executive coaching'; // Remove executive coaching test data
     });
   }, [vendors]);
 
