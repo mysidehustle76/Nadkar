@@ -111,7 +111,7 @@ const App = () => {
     
     // Validate required fields
     if (!newVendor.name || !newVendor.category || !newVendor.phone || !newVendor.description) {
-      alert('Please fill in all required fields');
+      console.log('Please fill in all required fields');
       setIsSubmitting(false);
       return;
     }
@@ -125,26 +125,9 @@ const App = () => {
     );
     
     if (duplicatePhone) {
-      alert(`This phone number (${formattedPhone}) already exists for "${duplicatePhone.name}". Please check if this is a duplicate entry.`);
+      console.log(`This phone number (${formattedPhone}) already exists for "${duplicatePhone.name}".`);
       setIsSubmitting(false);
       return;
-    }
-    
-    // Check for duplicate business name (soft warning)
-    const duplicateName = filteredVendors.find(vendor => 
-      vendor.name.toLowerCase().trim() === newVendor.name.toLowerCase().trim()
-    );
-    
-    if (duplicateName) {
-      const proceed = window.confirm(
-        `A business with the name "${newVendor.name}" already exists. ` +
-        `This could be a duplicate entry or a legitimate similar business name. ` +
-        `Do you want to proceed anyway?`
-      );
-      if (!proceed) {
-        setIsSubmitting(false);
-        return;
-      }
     }
     
     // Format phone number and business name before saving
@@ -165,9 +148,6 @@ const App = () => {
       });
 
       if (response.ok) {
-        // Immediate success feedback
-        alert('Vendor added successfully!');
-        
         // Reset form immediately
         setNewVendor({
           name: '',
@@ -184,12 +164,10 @@ const App = () => {
         await fetchVendors();
       } else {
         const errorData = await response.json();
-        alert(`Error: ${errorData.detail}`);
+        console.error(`Error: ${errorData.detail}`);
       }
     } catch (err) {
       console.error('Error adding vendor:', err);
-      // Immediate success feedback even if API fails (using fallback)
-      alert('Vendor added successfully!');
       
       // Fallback: Add directly to local state if API fails
       const newVendorWithId = {
