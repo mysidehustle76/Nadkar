@@ -140,6 +140,9 @@ frontend:
         -working: true
         -agent: "testing"
         -comment: "The Add New Vendor functionality with EXISTING category works correctly. When adding a vendor with an existing category (e.g., 'dental'), the vendor appears in the list with proper Title Case formatting for the name ('Yellow Pages Vendor Two') and category ('Dental'). The description is displayed as entered, and the phone number is correctly formatted in 3-3-4 format (444-555-6666). The vendor is immediately visible in the list after submission."
+        -working: true
+        -agent: "testing"
+        -comment: "Tested the success message display for the Add New Vendor functionality with EXISTING category. Successfully added a vendor with name 'sarah WILSON plumbing', description 'expert plumbing repair services', category 'plumbing', and phone '7701234567'. The success message appears correctly with the text '✅ New Vendor Added' on a GREEN background. The message is visible for approximately 4.7 seconds and then disappears as expected. The form closes successfully after submission, and the new vendor appears in the list as 'Sarah Wilson Plumbing' with proper Title Case formatting. The phone number is correctly formatted as '770-123-4567'."
 
   - task: "Phone number validation and 3-3-4 format display"
     implemented: true
