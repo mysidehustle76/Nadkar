@@ -51,6 +51,7 @@ const App = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [vendorToDelete, setVendorToDelete] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form state for adding new vendor
   const [newVendor, setNewVendor] = useState({
