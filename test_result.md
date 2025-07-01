@@ -326,9 +326,9 @@ metadata:
 
 test_plan:
   current_focus: 
-    - "GitHub comparison endpoint"
-    - "GitHub import endpoint"
-    - "GitHub file content endpoint"
+    - "Delete vendor functionality with confirmation dialog"
+    - "Warning message box display"
+    - "Remove Github import messages"
   stuck_tasks: 
     - "Fix for Nitin Nadkar vendors not showing consistently"
   test_all: false
