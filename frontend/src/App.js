@@ -294,13 +294,10 @@ const App = () => {
     setVendors(staticVendors);
     setLoading(false);
     
-    // Run cleanup and API update in background (non-blocking)
+    // Update from API in background (non-blocking)
     const backgroundTasks = async () => {
       try {
-        // Cleanup test data in background
-        await cleanupTestData();
-        
-        // Then update from API
+        // Get vendors from API
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3000);
         
