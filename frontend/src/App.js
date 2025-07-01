@@ -52,6 +52,7 @@ const App = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [vendorToDelete, setVendorToDelete] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   // Form state for adding new vendor
   const [newVendor, setNewVendor] = useState({
