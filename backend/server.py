@@ -10,6 +10,9 @@ from typing import List, Optional
 import uuid
 from datetime import datetime
 from bson import ObjectId
+import requests
+import json
+import base64
 
 
 ROOT_DIR = Path(__file__).parent
