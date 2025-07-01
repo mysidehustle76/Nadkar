@@ -342,6 +342,22 @@ const App = () => {
     };
   }, [filteredVendors]);
 
+  // Memoize sorted vendors for performance
+  const sortedVendors = useMemo(() => {
+    if (selectedCategory === '') {
+      return filteredVendors.sort((a, b) => {
+        // First sort by category, then by name within category
+        if (a.category === b.category) {
+          return a.name.localeCompare(b.name);
+        }
+        return a.category.localeCompare(b.category);
+      });
+    } else {
+      return filteredVendors
+        .filter(vendor => vendor.category.toLowerCase() === selectedCategory.toLowerCase())
+        .sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }, [filteredVendors, selectedCategory]);
 
 
   if (loading) {
