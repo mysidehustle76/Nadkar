@@ -669,7 +669,7 @@ const App = () => {
               <p className="text-sm"><strong>Phone:</strong> {vendorToDelete.phone}</p>
             </div>
             
-            <p className="text-sm text-red-600 mb-6">This action cannot be undone.</p>
+            <p className="text-sm text-black mb-6">This action cannot be undone.</p>
             
             <div className="flex space-x-3 justify-end">
               <button
