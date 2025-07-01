@@ -440,15 +440,7 @@ const App = () => {
 
   // Memoize filtered vendors for performance  
   const filteredVendors = useMemo(() => {
-    return vendors.filter(vendor => {
-      const name = vendor.name.toLowerCase().trim();
-      const category = vendor.category.toLowerCase().trim();
-      // Only filter out specific problematic entries, not all test vendors
-      return name !== 'nitin test vendor' && 
-             name !== 'carlos / jc painting' && 
-             category !== 'format test' && 
-             category !== 'executive coaching';
-    });
+    return vendors; // No filtering - show all vendors
   }, [vendors]);
 
   // Memoize categories for performance
