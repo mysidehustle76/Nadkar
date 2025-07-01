@@ -353,7 +353,7 @@ const App = () => {
       });
     } else {
       return filteredVendors
-        .filter(vendor => vendor.category.toLowerCase() === selectedCategory.toLowerCase())
+        .filter(vendor => vendor.category.toLowerCase().trim() === selectedCategory.toLowerCase().trim())
         .sort((a, b) => a.name.localeCompare(b.name));
     }
   }, [filteredVendors, selectedCategory]);
