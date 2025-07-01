@@ -537,18 +537,22 @@ const App = () => {
         </div>
       </section>
 
+      {/* Success Message - moved outside form to show after form closes */}
+      {showSuccessMessage && (
+        <div className="bg-green-50 border-b">
+          <div className="container mx-auto px-4 py-4">
+            <div className="p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+              ✅ {successMessage}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Add Vendor Form */}
       {showAddForm && (
         <div className="bg-gray-100 border-b">
           <div className="container mx-auto px-4 py-6">
             <h3 className="text-lg font-bold mb-4">Add New Vendor</h3>
-            
-            {/* Success Message */}
-            {showSuccessMessage && (
-              <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                ✅ New Vendor Added
-              </div>
-            )}
             
             {/* Validation Error Message */}
             {showValidationError && (
