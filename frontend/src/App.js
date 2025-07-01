@@ -234,7 +234,7 @@ const App = () => {
       if (response.ok) {
         // Remove vendor from local state immediately
         setVendors(prev => prev.filter(v => v.id !== vendorToDelete.id));
-        alert(`✅ ${vendorToDelete.name} has been deleted successfully!`);
+        // No success message needed - deletion is visually confirmed by vendor disappearing
       } else {
         const errorData = await response.json();
         alert(`❌ Error deleting vendor: ${errorData.detail}`);
