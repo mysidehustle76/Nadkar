@@ -607,9 +607,14 @@ const App = () => {
                   type="tel"
                   required
                   value={newVendor.phone}
-                  onChange={(e) => setNewVendor({...newVendor, phone: e.target.value})}
+                  onChange={(e) => {
+                    // Only allow numbers, remove any non-digit characters
+                    const numericValue = e.target.value.replace(/\D/g, '');
+                    setNewVendor({...newVendor, phone: numericValue});
+                  }}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   placeholder="1234567890 (numbers only)"
+                  maxLength="10"
                 />
                 <p className="text-xs text-gray-500 mt-1">Enter 10 digits only (no spaces or dashes)</p>
               </div>
