@@ -749,3 +749,194 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+# GitHub Import/Sync Functionality
+@api_router.get("/github/compare")
+async def compare_with_github():
+    """Compare local files with GitHub repository"""
+    try:
+        # Your GitHub repository details
+        repo_owner = "mysidehustle76"
+        repo_name = "Nadkar"
+        branch = "main"
+        
+        # GitHub API URL
+        github_api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents"
+        
+        comparison_results = []
+        
+        # Files to compare
+        files_to_check = [
+            {"local": "/app/frontend/src/App.js", "github": "frontend/src/App.js"},
+            {"local": "/app/frontend/package.json", "github": "frontend/package.json"},
+            {"local": "/app/backend/server.py", "github": "backend/server.py"},
+            {"local": "/app/backend/requirements.txt", "github": "backend/requirements.txt"},
+        ]
+        
+        for file_config in files_to_check:
+            local_path = file_config["local"]
+            github_path = file_config["github"]
+            
+            # Get local file content
+            local_content = ""
+            if os.path.exists(local_path):
+                with open(local_path, 'r', encoding='utf-8') as f:
+                    local_content = f.read()
+            
+            # Get GitHub file content
+            github_content = ""
+            try:
+                response = requests.get(f"{github_api_url}/{github_path}")
+                if response.status_code == 200:
+                    file_data = response.json()
+                    github_content = base64.b64decode(file_data['content']).decode('utf-8')
+            except Exception as e:
+                logger.error(f"Error fetching GitHub file {github_path}: {str(e)}")
+            
+            # Compare files
+            status = "unchanged"
+            if not local_content and github_content:
+                status = "added_to_github"
+            elif local_content and not github_content:
+                status = "missing_from_github"
+            elif local_content != github_content:
+                status = "modified"
+            
+            comparison_results.append({
+                "filename": os.path.basename(local_path),
+                "local_path": local_path,
+                "github_path": github_path,
+                "status": status,
+                "local_size": len(local_content),
+                "github_size": len(github_content)
+            })
+            
+        return {
+            "repository": f"{repo_owner}/{repo_name}",
+            "branch": branch,
+            "comparison_results": comparison_results,
+            "total_files": len(comparison_results)
+        }
+        
+    except Exception as e:
+        logger.error(f"Error comparing with GitHub: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error comparing with GitHub: {str(e)}")
+
+@api_router.post("/github/import")
+async def import_from_github(import_request: GitHubImportRequest):
+    """Import specific files from GitHub repository"""
+    try:
+        # Parse repository URL
+        repo_url = import_request.repository_url
+        if "github.com" not in repo_url:
+            raise HTTPException(status_code=400, detail="Invalid GitHub repository URL")
+        
+        # Extract owner and repo name from URL
+        # Expected format: https://github.com/owner/repo
+        parts = repo_url.replace("https://github.com/", "").split("/")
+        if len(parts) < 2:
+            raise HTTPException(status_code=400, detail="Invalid repository URL format")
+        
+        repo_owner = parts[0]
+        repo_name = parts[1]
+        branch = import_request.branch
+        
+        # GitHub API URL
+        github_api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents"
+        
+        imported_files = []
+        
+        # Default files to import if none specified
+        if not import_request.files_to_import:
+            import_request.files_to_import = [
+                "frontend/src/App.js",
+                "frontend/package.json",
+                "backend/server.py",
+                "backend/requirements.txt"
+            ]
+        
+        for github_path in import_request.files_to_import:
+            try:
+                # Get GitHub file content
+                response = requests.get(f"{github_api_url}/{github_path}")
+                if response.status_code == 200:
+                    file_data = response.json()
+                    github_content = base64.b64decode(file_data['content']).decode('utf-8')
+                    
+                    # Determine local path
+                    local_path = f"/app/{github_path}"
+                    
+                    # Create directory if it doesn't exist
+                    os.makedirs(os.path.dirname(local_path), exist_ok=True)
+                    
+                    # Backup existing file if it exists
+                    if os.path.exists(local_path):
+                        backup_path = f"{local_path}.backup"
+                        os.rename(local_path, backup_path)
+                    
+                    # Write new content
+                    with open(local_path, 'w', encoding='utf-8') as f:
+                        f.write(github_content)
+                    
+                    imported_files.append({
+                        "filename": os.path.basename(local_path),
+                        "local_path": local_path,
+                        "github_path": github_path,
+                        "status": "imported",
+                        "size": len(github_content)
+                    })
+                    
+                else:
+                    imported_files.append({
+                        "filename": os.path.basename(github_path),
+                        "github_path": github_path,
+                        "status": "failed",
+                        "error": f"HTTP {response.status_code}"
+                    })
+                    
+            except Exception as e:
+                imported_files.append({
+                    "filename": os.path.basename(github_path),
+                    "github_path": github_path,
+                    "status": "failed",
+                    "error": str(e)
+                })
+        
+        return {
+            "repository": f"{repo_owner}/{repo_name}",
+            "branch": branch,
+            "imported_files": imported_files,
+            "total_imported": len([f for f in imported_files if f.get("status") == "imported"])
+        }
+        
+    except Exception as e:
+        logger.error(f"Error importing from GitHub: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error importing from GitHub: {str(e)}")
+
+@api_router.get("/github/file-content")
+async def get_github_file_content(file_path: str):
+    """Get specific file content from GitHub for preview"""
+    try:
+        repo_owner = "mysidehustle76"
+        repo_name = "Nadkar"
+        
+        github_api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
+        
+        response = requests.get(github_api_url)
+        if response.status_code == 200:
+            file_data = response.json()
+            github_content = base64.b64decode(file_data['content']).decode('utf-8')
+            
+            return {
+                "filename": os.path.basename(file_path),
+                "path": file_path,
+                "content": github_content,
+                "size": len(github_content),
+                "last_modified": file_data.get('sha', 'unknown')
+            }
+        else:
+            raise HTTPException(status_code=404, detail="File not found in GitHub repository")
+            
+    except Exception as e:
+        logger.error(f"Error fetching GitHub file content: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching file content: {str(e)}")
