@@ -212,19 +212,6 @@ const App = () => {
 
   // Delete vendor
   const deleteVendor = async (vendor) => {
-    // Confirmation dialog with vendor details
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete this vendor?\n\n` +
-      `Name: ${vendor.name}\n` +
-      `Category: ${vendor.category}\n` +
-      `Phone: ${vendor.phone}\n\n` +
-      `This action cannot be undone.`
-    );
-
-    if (!confirmDelete) {
-      return;
-    }
-
     try {
       const response = await fetch(`${BACKEND_URL}/api/vendors/${vendor.id}`, {
         method: 'DELETE',
