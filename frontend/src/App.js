@@ -152,9 +152,10 @@ const App = () => {
       });
 
       if (response.ok) {
-        const addedVendor = await response.json();
-        // Refresh vendors from backend to ensure we have the latest data
-        await fetchVendors();
+        // Immediate success feedback
+        alert('Vendor added successfully!');
+        
+        // Reset form immediately
         setNewVendor({
           name: '',
           category: '',
@@ -165,13 +166,18 @@ const App = () => {
           hours: 'Contact for hours'
         });
         setShowAddForm(false);
-        alert('Vendor added successfully!');
+        
+        // Refresh vendors in background
+        await fetchVendors();
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.detail}`);
       }
     } catch (err) {
       console.error('Error adding vendor:', err);
+      // Immediate success feedback even if API fails (using fallback)
+      alert('Vendor added successfully!');
+      
       // Fallback: Add directly to local state if API fails
       const newVendorWithId = {
         ...formattedVendor,
@@ -188,7 +194,8 @@ const App = () => {
         hours: 'Contact for hours'
       });
       setShowAddForm(false);
-      alert('Vendor added successfully!');
+    } finally {
+      setIsSubmitting(false); // Re-enable button
     }
   };
 
