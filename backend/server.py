@@ -686,6 +686,25 @@ async def seed_vendors():
     await db.vendors.insert_many(initial_vendors)
     return {"message": f"Seeded {len(initial_vendors)} vendors successfully"}
 
+# Test database connection
+@api_router.get("/health")
+async def health_check():
+    try:
+        # Test MongoDB connection
+        await client.admin.command('ping')
+        return {
+            "status": "healthy",
+            "database": "connected",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy", 
+            "database": "disconnected",
+            "error": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
 # Include the router in the main app
 app.include_router(api_router)
 
