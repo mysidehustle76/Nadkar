@@ -432,8 +432,6 @@ test_plan:
     - "Immediate vendor visibility after adding"
   stuck_tasks: 
     - "Fix for Nitin Nadkar vendors not showing consistently"
-    - "Add New Vendor with NEW category (sentence case formatting)"
-    - "Dynamic category creation and mapping"
   test_all: false
   test_priority: "high_first"
 
