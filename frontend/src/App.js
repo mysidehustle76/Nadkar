@@ -343,12 +343,14 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Community Banner */}
+      {/* Community Banner - Optimized */}
       <section className="relative">
         <img 
-          src="https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=1920&height=1168&fit=bounds&ois=2c7ddaf" 
+          src="https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=800&height=400&fit=bounds&ois=2c7ddaf" 
           alt="Bellmoore Park Community" 
           className="w-full h-80 object-cover"
+          loading="lazy"
+          style={{ maxWidth: '100%', height: '320px' }}
         />
       </section>
 
