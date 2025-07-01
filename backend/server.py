@@ -163,7 +163,12 @@ async def update_vendor(vendor_id: str, vendor_update: VendorUpdate):
 async def delete_vendor(vendor_id: str):
     """Delete a vendor"""
     try:
-        result = await db.vendors.delete_one({"id": vendor_id})
+        # Try to delete by MongoDB ObjectId first (for vendors with _id)
+        if ObjectId.is_valid(vendor_id):
+            result = await db.vendors.delete_one({"_id": ObjectId(vendor_id)})
+        else:
+            # Fallback to deleting by custom id field (for seeded vendors)
+            result = await db.vendors.delete_one({"id": vendor_id})
         
         if result.deleted_count == 0:
             raise HTTPException(status_code=404, detail="Vendor not found")
