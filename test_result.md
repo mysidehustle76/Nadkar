@@ -326,7 +326,9 @@ metadata:
 
 test_plan:
   current_focus: 
-    - "Fix for Nitin Nadkar vendors not showing consistently"
+    - "GitHub comparison endpoint"
+    - "GitHub import endpoint"
+    - "GitHub file content endpoint"
   stuck_tasks: 
     - "Fix for Nitin Nadkar vendors not showing consistently"
   test_all: false
