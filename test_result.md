@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Enhance Yellow Pages app: Test the delete functionality including warning message box, user confirmation with 'Yes', successful vendor deletion, and remove any generic Github import messages."
+user_problem_statement: "Enhance Yellow Pages app: Test Add New Vendor functionality with two scenarios - Option 1: Add vendor with NEW category (sentence case formatting, dynamic categories, numbers-only phone validation, 3-3-4 format display, immediate visibility). Option 2: Add vendor with EXISTING category (Title Case formatting, existing category mapping, same phone requirements, immediate visibility). Remove Github messages, show only 'New Vendor Added'."
 
 frontend:
   - task: "Delete vendor functionality with confirmation dialog"
