@@ -213,8 +213,17 @@ const App = () => {
 
   // Delete vendor
   const deleteVendor = async (vendor) => {
+    // Show custom confirmation dialog
+    setVendorToDelete(vendor);
+    setShowDeleteConfirm(true);
+  };
+
+  // Confirm delete vendor
+  const confirmDeleteVendor = async () => {
+    if (!vendorToDelete) return;
+
     try {
-      const response = await fetch(`${BACKEND_URL}/api/vendors/${vendor.id}`, {
+      const response = await fetch(`${BACKEND_URL}/api/vendors/${vendorToDelete.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -223,8 +232,8 @@ const App = () => {
 
       if (response.ok) {
         // Remove vendor from local state immediately
-        setVendors(prev => prev.filter(v => v.id !== vendor.id));
-        alert(`✅ ${vendor.name} has been deleted successfully!`);
+        setVendors(prev => prev.filter(v => v.id !== vendorToDelete.id));
+        alert(`✅ ${vendorToDelete.name} has been deleted successfully!`);
       } else {
         const errorData = await response.json();
         alert(`❌ Error deleting vendor: ${errorData.detail}`);
@@ -232,7 +241,17 @@ const App = () => {
     } catch (err) {
       console.error('Error deleting vendor:', err);
       alert('❌ Error deleting vendor. Please try again.');
+    } finally {
+      // Close confirmation dialog
+      setShowDeleteConfirm(false);
+      setVendorToDelete(null);
     }
+  };
+
+  // Cancel delete
+  const cancelDeleteVendor = () => {
+    setShowDeleteConfirm(false);
+    setVendorToDelete(null);
   };
 
   // Seed database with initial data
