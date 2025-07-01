@@ -302,11 +302,11 @@ frontend:
 
   - task: "Fix for Nitin Nadkar vendors not showing consistently"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
         -working: "NA"
         -agent: "testing"
@@ -314,6 +314,9 @@ frontend:
         -working: true
         -agent: "testing"
         -comment: "Fixed the issue by modifying the filtering logic in App.js to trim whitespace before comparison. Changed 'category.toLowerCase()' to 'category.toLowerCase().trim()' in both the filteredVendors useMemo hook and the sortedVendors useMemo hook. Testing confirms that the fix works correctly - vendors with category 'executive coaching' and 'Executive Coaching ' (with trailing space) are now both properly filtered out. The category dropdown no longer shows 'Executive Coaching' category."
+        -working: false
+        -agent: "testing"
+        -comment: "Investigated the 'executive coaching' category issue. Found 5 vendors with 'executive coaching' category in the database (in various case formats): 1) Nitin Nadkar (lowercase 'executive coaching'), 2) Test Executive Coach (capitalized 'Executive Coaching'), 3) Test Business Abc (capitalized 'Executive Coaching'), 4) Category Format Test (capitalized 'Executive Coaching'), 5) Test Executive Coach (capitalized 'Executive Coaching'). The current filtering logic in App.js (lines 387-397) filters out vendors with names starting with 'test', name exactly matching 'nitin test vendor', name exactly matching 'carlos / jc painting', and category exactly matching 'format test'. However, it does NOT explicitly filter out vendors with category 'executive coaching' (in any case format). Despite this, our UI testing shows that no vendors with 'executive coaching' category are visible on the page and 'Executive Coaching' is not available in the dropdown. This suggests there might be additional filtering happening elsewhere, or the filtering logic has been updated but we're not seeing the most recent version of the code. To properly address the user's request to remove 'executive coaching' category and associated vendors, we should update the filtering logic to explicitly include: category.toLowerCase().trim() !== 'executive coaching'"
 
 metadata:
   created_by: "testing_agent"
