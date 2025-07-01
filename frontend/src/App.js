@@ -312,25 +312,35 @@ const App = () => {
     "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
   ];
 
-  // Filter out specific test data entries
-  const filteredVendors = vendors.filter(vendor => {
-    const name = vendor.name.toLowerCase();
-    const category = vendor.category.toLowerCase();
-    return !name.startsWith('test') && 
-           name !== 'nitin nadkar' && // Remove specific test entries
-           name !== 'nitin test vendor' && // Remove additional test entry
-           category !== 'format test' && 
-           category !== 'executive coaching' &&
-           category !== 'business consulting' &&
-           category !== 'legal consulting'; // Remove test category
-  });
+  // Memoize filtered vendors for performance
+  const filteredVendors = useMemo(() => {
+    return vendors.filter(vendor => {
+      const name = vendor.name.toLowerCase();
+      const category = vendor.category.toLowerCase();
+      return !name.startsWith('test') && 
+             name !== 'nitin nadkar' && // Remove specific test entries
+             name !== 'nitin test vendor' && // Remove additional test entry
+             category !== 'format test' && 
+             category !== 'executive coaching' &&
+             category !== 'business consulting' &&
+             category !== 'legal consulting'; // Remove test category
+    });
+  }, [vendors]);
 
-  // Only show categories that have associated vendors (after filtering), but keep standard categories for new additions
-  const vendorCategories = [...new Set(filteredVendors.map(vendor => vendor.category))];
-  // For the dropdown, only show categories that actually have vendors
-  const allCategories = vendorCategories.sort();
-  // For the form datalist, include standard categories to allow new additions
-  const allCategoriesForForm = [...new Set([...vendorCategories, ...standardCategories])].sort();
+  // Memoize categories for performance
+  const { allCategories, allCategoriesForForm } = useMemo(() => {
+    // Only show categories that have associated vendors (after filtering), but keep standard categories for new additions
+    const vendorCategories = [...new Set(filteredVendors.map(vendor => vendor.category))];
+    // For the dropdown, only show categories that actually have vendors
+    const categories = vendorCategories.sort();
+    // For the form datalist, include standard categories to allow new additions
+    const categoriesForForm = [...new Set([...vendorCategories, ...standardCategories])].sort();
+    
+    return {
+      allCategories: categories,
+      allCategoriesForForm: categoriesForForm
+    };
+  }, [filteredVendors]);
 
 
 
