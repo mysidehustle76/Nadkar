@@ -155,11 +155,11 @@ frontend:
 
   - task: "Dynamic category creation and mapping"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/App.js"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
@@ -167,6 +167,9 @@ frontend:
         -working: false
         -agent: "testing"
         -comment: "Dynamic category creation is not working correctly. When adding a vendor with a new category, the category doesn't appear in the dropdown after submission. This is likely related to the issue with new vendors not appearing in the list. The category detection logic seems to be working (as evidenced by the successful Title Case formatting for existing categories), but new categories aren't being added to the dropdown."
+        -working: true
+        -agent: "testing"
+        -comment: "Retested dynamic category creation with non-blocked words. Successfully added a vendor with a new category 'CUSTOM home SERVICES'. The category detection logic works correctly - it identifies this as a new category and applies sentence case formatting. The new category 'Custom home services' appears in the category dropdown immediately after adding the vendor. The category is correctly formatted in sentence case on the vendor card."
 
   - task: "Immediate vendor visibility after adding"
     implemented: true
