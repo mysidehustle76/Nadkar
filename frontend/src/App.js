@@ -52,6 +52,8 @@ const App = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [vendorToDelete, setVendorToDelete] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showValidationError, setShowValidationError] = useState(false);
+  const [validationMessage, setValidationMessage] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showValidationError, setShowValidationError] = useState(false);
   const [validationMessage, setValidationMessage] = useState('');
