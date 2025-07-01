@@ -316,7 +316,7 @@ const App = () => {
   const filteredVendors = useMemo(() => {
     return vendors.filter(vendor => {
       const name = vendor.name.toLowerCase();
-      const category = vendor.category.toLowerCase();
+      const category = vendor.category.toLowerCase().trim(); // Trim whitespace before comparison
       return !name.startsWith('test') && 
              name !== 'nitin test vendor' && // Remove specific test entry only
              category !== 'format test' && 
