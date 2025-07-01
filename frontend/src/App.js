@@ -365,15 +365,20 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Community Banner - Optimized */}
+      {/* Community Banner - Local optimized image */}
       <section className="relative">
-        <img 
-          src="https://media.theprovidencegroup.com/259/2020/9/29/gMs1W.jpeg?width=800&height=400&fit=bounds&ois=2c7ddaf" 
-          alt="Bellmoore Park Community" 
-          className="w-full h-80 object-cover"
-          loading="lazy"
-          style={{ maxWidth: '100%', height: '320px' }}
-        />
+        <div 
+          className="w-full h-80 bg-gradient-to-r from-yellow-100 to-yellow-200 flex items-center justify-center"
+          style={{ 
+            backgroundImage: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+            height: '320px'
+          }}
+        >
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-800 mb-2">BMP Yellow Pages</h1>
+            <p className="text-lg text-gray-600">Bellmoore Park Community Directory</p>
+          </div>
+        </div>
       </section>
 
       {/* Add Vendor Form */}
