@@ -113,26 +113,8 @@ async def get_vendors():
 
 @api_router.post("/vendors", response_model=Vendor)
 async def create_vendor(vendor: VendorCreate):
-    """Create a new vendor with fallback support"""
-    global USE_FALLBACK_DATA
-    
+    """Create a new vendor"""
     try:
-        # If in fallback mode, simulate success
-        if USE_FALLBACK_DATA:
-            new_vendor = {
-                "id": f"fallback-{len(str(uuid.uuid4())[:8])}",
-                "name": vendor.name,
-                "category": vendor.category,
-                "phone": vendor.phone,
-                "rating": vendor.rating,
-                "address": vendor.address,
-                "description": vendor.description,
-                "hours": vendor.hours,
-                "created_at": datetime.utcnow().isoformat()
-            }
-            return Vendor(**new_vendor)
-        
-        # Try database operation
         vendor_dict = vendor.dict()
         vendor_dict['id'] = str(uuid.uuid4())
         vendor_dict['created_at'] = datetime.utcnow()
@@ -145,25 +127,10 @@ async def create_vendor(vendor: VendorCreate):
         if isinstance(vendor_dict['id'], ObjectId):
             vendor_dict['id'] = str(vendor_dict['id'])
             
-        return Vendor(**vendor_dict)
-        
+        return vendor_dict
     except Exception as e:
-        logger.error(f"Error creating vendor, using fallback: {str(e)}")
-        USE_FALLBACK_DATA = True
-        
-        # Return simulated success
-        new_vendor = {
-            "id": f"fallback-{str(uuid.uuid4())[:8]}",
-            "name": vendor.name,
-            "category": vendor.category, 
-            "phone": vendor.phone,
-            "rating": vendor.rating,
-            "address": vendor.address,
-            "description": vendor.description + " - DEMO MODE",
-            "hours": vendor.hours,
-            "created_at": datetime.utcnow().isoformat()
-        }
-        return Vendor(**new_vendor)
+        logger.error(f"Error creating vendor: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating vendor: {str(e)}")
 
 @api_router.get("/vendors/{vendor_id}", response_model=Vendor)
 async def get_vendor(vendor_id: str):
