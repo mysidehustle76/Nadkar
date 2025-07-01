@@ -344,8 +344,11 @@ metadata:
 
 test_plan:
   current_focus: 
-    - "Warning message box display"
-    - "Remove Github import messages"
+    - "Add New Vendor with NEW category (sentence case)"
+    - "Add New Vendor with EXISTING category (Title Case)"
+    - "Phone validation and 3-3-4 format display"
+    - "Dynamic category creation"
+    - "Immediate vendor visibility after adding"
   stuck_tasks: 
     - "Fix for Nitin Nadkar vendors not showing consistently"
   test_all: false
