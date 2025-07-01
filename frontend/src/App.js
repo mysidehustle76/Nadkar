@@ -501,6 +501,21 @@ const App = () => {
         <div className="bg-gray-100 border-b">
           <div className="container mx-auto px-4 py-6">
             <h3 className="text-lg font-bold mb-4">Add New Vendor</h3>
+            
+            {/* Success Message */}
+            {showSuccessMessage && (
+              <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                ✅ New Vendor Added
+              </div>
+            )}
+            
+            {/* Validation Error Message */}
+            {showValidationError && (
+              <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                ❌ {validationMessage}
+              </div>
+            )}
+            
             <form onSubmit={addVendor} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Contact Name *</label>
@@ -542,7 +557,7 @@ const App = () => {
                     <option key={category} value={category} />
                   ))}
                 </datalist>
-                <p className="text-xs text-gray-500 mt-1">Choose from dropdown or type a new category (e.g., "Life Coaching")</p>
+                <p className="text-xs text-gray-500 mt-1">Choose from dropdown or type a new category</p>
               </div>
               
               <div>
@@ -553,8 +568,9 @@ const App = () => {
                   value={newVendor.phone}
                   onChange={(e) => setNewVendor({...newVendor, phone: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
-                  placeholder="(555) 123-4567"
+                  placeholder="1234567890 (numbers only)"
                 />
+                <p className="text-xs text-gray-500 mt-1">Enter 10 digits only (no spaces or dashes)</p>
               </div>
               
               <div className="md:col-span-2">
