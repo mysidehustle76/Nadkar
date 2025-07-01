@@ -438,16 +438,16 @@ const App = () => {
     "Veterinarians", "Water Treatment", "Wedding Services", "Yoga & Wellness"
   ];
 
-  // Memoize filtered vendors for performance
+  // Memoize filtered vendors for performance  
   const filteredVendors = useMemo(() => {
     return vendors.filter(vendor => {
       const name = vendor.name.toLowerCase().trim();
-      const category = vendor.category.toLowerCase().trim(); // Trim whitespace before comparison
-      return !name.startsWith('test') && 
-             name !== 'nitin test vendor' && // Remove specific test entry only
-             name !== 'carlos / jc painting' && // Remove only this specific duplicate entry
-             category !== 'format test' && // Only block obvious test category
-             category !== 'executive coaching'; // Remove executive coaching test data
+      const category = vendor.category.toLowerCase().trim();
+      // Only filter out specific problematic entries, not all test vendors
+      return name !== 'nitin test vendor' && 
+             name !== 'carlos / jc painting' && 
+             category !== 'format test' && 
+             category !== 'executive coaching';
     });
   }, [vendors]);
 
