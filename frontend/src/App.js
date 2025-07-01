@@ -401,6 +401,20 @@ const App = () => {
     return cleaned.length === 10;
   };
 
+  // Format to Title Case (Initial Capitals) for names and categories
+  const formatToTitleCase = (text) => {
+    if (!text) return text;
+    return text
+      .toLowerCase()
+      .split(' ')
+      .map(word => {
+        if (word.length === 0) return word;
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join(' ')
+      .trim();
+  };
+
   // Get all unique categories from vendors + standard categories
   const standardCategories = [
     "Academic Tutoring", "Accounting & Tax", "Air Conditioning & Heating", "Appliance Repair",
