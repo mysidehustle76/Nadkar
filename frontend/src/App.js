@@ -107,31 +107,31 @@ const App = () => {
   const addVendor = async (e) => {
     e.preventDefault();
     
-    // Prevent double submission
     if (isSubmitting) return;
     setIsSubmitting(true);
     
     // Validate required fields
     if (!newVendor.name || !newVendor.category || !newVendor.phone || !newVendor.description) {
-      // Create custom validation message
       setShowValidationError(true);
       setValidationMessage('Please fill in all required fields');
       setIsSubmitting(false);
+      setTimeout(() => setShowValidationError(false), 3000);
       return;
     }
     
     // Validate phone number (numbers only)
     if (!validatePhoneNumber(newVendor.phone)) {
       setShowValidationError(true);
-      setValidationMessage('Phone number must contain only numbers (10 digits)');
+      setValidationMessage('Phone number must contain exactly 10 digits');
       setIsSubmitting(false);
+      setTimeout(() => setShowValidationError(false), 3000);
       return;
     }
     
-    // Format all fields properly
+    // Format all fields to Title Case (Initial Capitals)
     const formattedVendor = {
-      name: formatBusinessName(newVendor.name),
-      category: formatCategoryName(newVendor.category),
+      name: formatToTitleCase(newVendor.name),
+      category: formatToTitleCase(newVendor.category),
       phone: formatPhoneNumber(newVendor.phone),
       description: newVendor.description,
       rating: newVendor.rating,
@@ -166,24 +166,21 @@ const App = () => {
         });
         setShowAddForm(false);
         
-        // Show success message
+        // Show clean success message (no GitHub domain)
         setShowSuccessMessage(true);
         setSuccessMessage('New Vendor Added');
-        
-        // Hide success message after 3 seconds
-        setTimeout(() => {
-          setShowSuccessMessage(false);
-        }, 3000);
+        setTimeout(() => setShowSuccessMessage(false), 3000);
         
       } else {
         const errorData = await response.json();
         setShowValidationError(true);
         setValidationMessage(`Error: ${errorData.detail}`);
+        setTimeout(() => setShowValidationError(false), 3000);
       }
     } catch (err) {
-      console.error('Network Error:', err);
       setShowValidationError(true);
       setValidationMessage('Network error. Please try again.');
+      setTimeout(() => setShowValidationError(false), 3000);
     } finally {
       setIsSubmitting(false);
     }
