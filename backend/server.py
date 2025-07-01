@@ -677,6 +677,53 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.post("/api/vendors/cleanup-test-data")
+async def cleanup_test_data():
+    """Delete specific test data vendors from database"""
+    try:
+        # Categories with test data to remove
+        test_categories = [
+            "Business Consulting",
+            "Communication and Persuasion", 
+            "Legal Consulting",
+            "Wellbeing"
+        ]
+        
+        deleted_count = 0
+        deleted_vendors = []
+        
+        # Find and delete vendors with test categories (case insensitive)
+        for category in test_categories:
+            # Use case-insensitive regex to find vendors
+            vendors_to_delete = list(db.vendors.find({
+                "category": {"$regex": f"^{category}$", "$options": "i"}
+            }))
+            
+            # Store info about what we're deleting
+            for vendor in vendors_to_delete:
+                deleted_vendors.append({
+                    "name": vendor.get("name"),
+                    "category": vendor.get("category")
+                })
+            
+            # Delete the vendors
+            result = db.vendors.delete_many({
+                "category": {"$regex": f"^{category}$", "$options": "i"}
+            })
+            deleted_count += result.deleted_count
+        
+        logger.info(f"Deleted {deleted_count} test data vendors")
+        
+        return {
+            "message": f"Successfully deleted {deleted_count} test data vendors",
+            "deleted_vendors": deleted_vendors,
+            "categories_cleaned": test_categories
+        }
+        
+    except Exception as e:
+        logger.error(f"Error cleaning up test data: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error cleaning up test data: {str(e)}")
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
