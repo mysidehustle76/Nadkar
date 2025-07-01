@@ -3,8 +3,8 @@ import json
 import time
 import sys
 
-# Get the backend URL from frontend/.env
-BACKEND_URL = "https://c5473c1a-19b3-4aae-a5c2-4a296ef2fd8c.preview.emergentagent.com"
+# Use the local backend URL for testing
+BACKEND_URL = "http://localhost:8001"
 API_URL = f"{BACKEND_URL}/api"
 
 def print_separator():
