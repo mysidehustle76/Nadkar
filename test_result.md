@@ -105,6 +105,21 @@
 user_problem_statement: "Enhance Yellow Pages app: Test the delete functionality including warning message box, user confirmation with 'Yes', successful vendor deletion, and remove any generic Github import messages."
 
 frontend:
+  - task: "Delete vendor functionality with confirmation dialog"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/App.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Implemented delete vendor functionality with confirmation dialog"
+        -working: false
+        -agent: "testing"
+        -comment: "The delete vendor functionality is partially working. The delete button on vendor cards works correctly, and clicking it shows a confirmation dialog with the correct vendor details and warning message. The dialog has 'Cancel' and 'Delete' buttons as required. However, when clicking the 'Delete' button, the vendor is not actually deleted. The issue is in the backend - the DELETE request to /api/vendors/{id} returns a 404 'Vendor not found' error. This is because there's a mismatch between how vendor IDs are stored and queried in the backend. The GET /api/vendors endpoint returns vendors with IDs converted from MongoDB _id field, but the DELETE endpoint is looking for a document with {id: vendor_id} instead of {_id: ObjectId(vendor_id)}."
+
   - task: "Main landing page with Yellow Pages design"
     implemented: true
     working: true
