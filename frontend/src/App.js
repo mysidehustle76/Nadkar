@@ -135,12 +135,16 @@ const App = () => {
       return;
     }
     
-    // Format all fields to Title Case (Initial Capitals)
+    // Check if category already exists (case-insensitive)
+    const existingCategories = [...new Set(filteredVendors.map(vendor => vendor.category.toLowerCase()))];
+    const isNewCategory = !existingCategories.includes(newVendor.category.toLowerCase());
+    
+    // Format fields based on whether category is new or existing
     const formattedVendor = {
-      name: formatToTitleCase(newVendor.name),
-      category: formatToTitleCase(newVendor.category),
+      name: isNewCategory ? formatToSentenceCase(newVendor.name) : formatToTitleCase(newVendor.name),
+      category: isNewCategory ? formatToSentenceCase(newVendor.category) : formatToTitleCase(newVendor.category),
       phone: formatPhoneNumber(newVendor.phone),
-      description: newVendor.description,
+      description: isNewCategory ? formatToSentenceCase(newVendor.description) : newVendor.description,
       rating: newVendor.rating,
       address: newVendor.address,
       hours: newVendor.hours
