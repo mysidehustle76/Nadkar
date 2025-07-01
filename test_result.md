@@ -107,9 +107,9 @@ user_problem_statement: "Enhance Yellow Pages app: Test the delete functionality
 frontend:
   - task: "Delete vendor functionality with confirmation dialog"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/App.js"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
@@ -119,6 +119,9 @@ frontend:
         -working: false
         -agent: "testing"
         -comment: "The delete vendor functionality is partially working. The delete button on vendor cards works correctly, and clicking it shows a confirmation dialog with the correct vendor details and warning message. The dialog has 'Cancel' and 'Delete' buttons as required. However, when clicking the 'Delete' button, the vendor is not actually deleted. The issue is in the backend - the DELETE request to /api/vendors/{id} returns a 404 'Vendor not found' error. This is because there's a mismatch between how vendor IDs are stored and queried in the backend. The GET /api/vendors endpoint returns vendors with IDs converted from MongoDB _id field, but the DELETE endpoint is looking for a document with {id: vendor_id} instead of {_id: ObjectId(vendor_id)}."
+        -working: true
+        -agent: "testing"
+        -comment: "The delete vendor functionality is now working correctly. The backend issue has been fixed by modifying the delete_vendor endpoint to try deleting by MongoDB ObjectId first (for vendors with _id) and then falling back to deleting by custom id field (for seeded vendors). Testing confirms that: 1) Clicking the delete button (trash icon) on a vendor card shows a confirmation dialog with the correct vendor details and warning message, 2) The dialog has 'Cancel' and 'Delete' buttons as required, 3) Clicking the 'Delete' button successfully removes the vendor from the database and the UI updates immediately to reflect the deletion, 4) No error messages appear during the process. The vendor count correctly decreases after deletion, and the deleted vendor is no longer visible in the list."
 
   - task: "Main landing page with Yellow Pages design"
     implemented: true
