@@ -173,7 +173,7 @@ const App = () => {
         });
         setShowAddForm(false);
         
-        // Show clean success message (no GitHub domain)
+        // Show success message
         setShowSuccessMessage(true);
         setSuccessMessage('New Vendor Added');
         setTimeout(() => setShowSuccessMessage(false), 3000);
