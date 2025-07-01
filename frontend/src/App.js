@@ -373,18 +373,18 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Community Banner - Reduced height */}
+      {/* Community Banner - Increased height by 25% */}
       <section className="relative">
         <div 
-          className="w-full h-20 bg-gradient-to-r from-yellow-100 to-yellow-200 flex items-center justify-center"
+          className="w-full h-24 bg-gradient-to-r from-yellow-100 to-yellow-200 flex items-center justify-center"
           style={{ 
             backgroundImage: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
-            height: '80px'
+            height: '100px'
           }}
         >
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-1">Bellmoore Park Yellow Pages</h1>
-            <p className="text-sm text-gray-600 italic">Service Providers that your neighbors trust!</p>
+            <h1 className="text-3xl font-bold text-gray-800 mb-1">Bellmoore Park Yellow Pages</h1>
+            <p className="text-base text-gray-600 italic">Service Providers that your neighbors trust!</p>
           </div>
         </div>
       </section>
