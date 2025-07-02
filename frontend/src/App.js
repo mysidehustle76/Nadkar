@@ -283,16 +283,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Load static vendors immediately for instant display (restore fast loading)
-    setVendors(staticVendors);
-    setLoading(false);
-    
-    // Update from API in background (non-blocking)
-    const backgroundTasks = async () => {
+    const loadVendors = async () => {
       try {
-        // Get vendors from API
+        setLoading(true);
+        
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
         
         const response = await fetch(`${BACKEND_URL}/api/vendors`, {
           signal: controller.signal,
@@ -303,17 +299,20 @@ const App = () => {
         
         if (response.ok) {
           const data = await response.json();
-          if (data && data.length > 0) {
-            setVendors(data);
-          }
+          setVendors(data);
+        } else {
+          // Fallback to static if API fails
+          setVendors(staticVendors);
         }
       } catch (err) {
-        console.log('Background tasks failed, keeping static vendors');
+        console.error('Error fetching vendors:', err);
+        setVendors(staticVendors);
+      } finally {
+        setLoading(false);
       }
     };
     
-    // Run background tasks after 1 second delay (non-blocking)
-    setTimeout(backgroundTasks, 1000);
+    loadVendors();
   }, []);
 
   useEffect(() => {
