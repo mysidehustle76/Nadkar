@@ -495,6 +495,13 @@ const App = () => {
     };
   }, [filteredVendors]);
 
+  // Reset category selection if selected category no longer exists
+  useEffect(() => {
+    if (selectedCategory && !allCategories.includes(selectedCategory)) {
+      setSelectedCategory(''); // Reset to "All Categories"
+    }
+  }, [allCategories, selectedCategory]);
+
   // Memoize sorted vendors for performance
   const sortedVendors = useMemo(() => {
     if (selectedCategory === '') {
