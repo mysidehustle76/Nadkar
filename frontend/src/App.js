@@ -486,9 +486,12 @@ const App = () => {
     // For the form datalist, include standard categories to allow new additions
     const categoriesForForm = [...new Set([...vendorCategories, ...standardCategories])].sort();
     
+    // Ensure we always have categories even during loading
+    const finalCategories = categories.length > 0 ? categories : standardCategories.slice(0, 10);
+    
     return {
-      allCategories: categories,
-      allCategoriesForForm: categoriesForForm
+      allCategories: finalCategories,
+      allCategoriesForForm: categoriesForForm.length > 0 ? categoriesForForm : standardCategories
     };
   }, [filteredVendors]);
 
