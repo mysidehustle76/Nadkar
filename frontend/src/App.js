@@ -177,11 +177,6 @@ const App = () => {
         });
         setShowAddForm(false);
         
-        // Show success message
-        setShowSuccessMessage(true);
-        setSuccessMessage('New Vendor Added');
-        setTimeout(() => setShowSuccessMessage(false), 3000);
-        
       } else {
         const errorData = await response.json();
         setShowValidationError(true);
